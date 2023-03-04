@@ -1,0 +1,9 @@
+{% extends "@classy/page.html.twig" %}
+
+{% block content %}
+  <h1>{{ song.title }}</h1>
+  <p>Album: {{ song.album }}</p>
+  <p>Artist: {{ song.artist }}</p>
+  <p><a href="{{ song.spotify_url }}">Listen on Spotify</a></p>
+{% endblock %}
+
