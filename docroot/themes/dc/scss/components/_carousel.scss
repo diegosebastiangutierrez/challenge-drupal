@@ -1,0 +1,11 @@
+.carousel-inner {
+  box-shadow: inset 0 -160px 70px -50px $black;
+
+  img {
+    z-index: -1;
+  }
+
+  .carousel-caption {
+    padding-bottom: 0.25rem;
+  }
+}

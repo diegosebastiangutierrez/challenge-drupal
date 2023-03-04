@@ -1,0 +1,14 @@
+#block-views-block-songs-top-artist-songs {
+  @extend .my-4;
+
+  h2 {
+    text-align: center;
+  }
+
+  .node--type-song.node--view-mode-teaser {
+    max-width: 300px;
+    @extend .mx-auto;
+    @extend .my-4;
+    @extend .shadow;
+  }
+}

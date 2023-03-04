@@ -1,0 +1,28 @@
+#block-dc-local-tasks {
+  margin-bottom: 1em;
+
+  .nav-tabs {
+    .nav-item {
+      a {
+        margin-bottom: calc(var(--bs-nav-tabs-border-width) * -1);
+        background: none;
+        border: var(--bs-nav-tabs-border-width) solid transparent;
+        border-top-left-radius: var(--bs-nav-tabs-border-radius);
+        border-top-right-radius: var(--bs-nav-tabs-border-radius);
+        display: block;
+        padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+        font-size: var(--bs-nav-link-font-size);
+        font-weight: var(--bs-nav-link-font-weight);
+        color: var(--bs-nav-link-color);
+        text-decoration: none;
+        transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+
+        &.is-active {
+          background-color: var(--bs-nav-tabs-link-active-bg);
+          border-color: var(--bs-nav-tabs-link-active-border-color);
+          color: var(--bs-nav-tabs-link-active-color);
+        }
+      }
+    }
+  }
+}

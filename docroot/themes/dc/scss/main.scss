@@ -1,0 +1,40 @@
+/* import only the necessary Bootstrap files */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+/* -------begin customization-------- */
+$theme-colors: (
+  primary:   #50d4f5,
+  secondary: #ececec,
+  success:   #6cf550,
+  info:      #50a5f5,
+  warning:   #f5e550,
+  danger:    #f55050,
+  light:     #ffffff,
+  dark:      #121212
+);
+
+$body-bg: $dark;
+$body-color: $light;
+$card-bg: $dark;
+$link-color: #50d4f5;
+$link-hover-color: #3ba1bb;
+$pagination-bg: transparent;
+$pagination-color: #50d4f5;
+$pagination-border-color: #50d4f5;
+$pagination-active-bg: transparent;
+$pagination-active-color: $light;
+$pagination-active-border-color: #50d4f5;
+
+// /* -------end customization-------- */
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import 'base/elements';
+@import 'content/artist-full';
+@import 'content/artist-teaser';
+@import 'content/node';
+@import 'content/song-full';
+@import 'content/song-teaser';
+@import 'forms/views-exposed-form';
+@import 'navigation/menu-local-tasks';
+@import 'components/carousel';

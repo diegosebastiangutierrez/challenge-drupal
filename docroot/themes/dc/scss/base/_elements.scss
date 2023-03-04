@@ -1,0 +1,47 @@
+.placeholder {
+  background-color: transparent;
+  cursor: pointer;
+  display: inline;
+  min-height: 0;
+  opacity: 1;
+  vertical-align: baseline;
+}
+
+body {
+  font-weight: 700;
+}
+
+.link-with-arrow {
+  text-decoration: none;
+  // font-weight: bold;
+
+  &:after {
+    content: ">";
+    display: inline-block;
+    left: 5px;
+    position: relative;
+    transition: 0.5s all;
+  }
+
+  &:hover {
+    &:after {
+      content: ">";
+      display: inline-block;
+      transform: translateX(5px);
+    }
+  }
+}
+
+.genre {
+  cursor: auto;
+
+  @extend .btn;
+  @extend .btn-outline-primary;
+  @extend .btn-sm;
+  @extend .my-1;
+  @extend .me-1;
+}
+
+.flex-basis-100 {
+  flex-basis: 100%;
+}

@@ -1,0 +1,141 @@
+<?php
+
+use Drupal\dc_spotify\Utils\DcSpotifyHelper;
+
+/*
+ * Implements hook_cron().
+*/
+
+function dc_spotify_cron() {
+  // Service instance.
+  $service = Drupal::service('dc_spotify.api_service');
+
+  if ($service->accessTokenIsExpired()) {
+    // Call service function to get the access token.
+    $service->auth();
+  }
+
+  // Call service to get the songs.
+  $songs = $service->getSongs();
+
+  foreach ($songs->items as $song) {
+    $genres = array();
+    $genres_artist = array();
+    $artists = array();
+    $artists_album = array();
+    $song = $song->track;
+
+    if ($song->album->images) {
+      $picture = $song->album->images[0]->url;
+    } else {
+      $picture = '';
+    }
+
+    // Create node object (album) for each song in the request body.
+    $album = DcSpotifyHelper::createNode([
+      'type' => 'album',
+      'title' => $song->album->name,
+      'field_spotify_id' => $song->album->id,
+      'field_spotify_link' => $song->album->external_urls->spotify,
+      'field_picture' => $picture,
+      'field_type' => $song->album->album_type,
+    ]);
+
+    foreach ($song->album->artists as $artist) {
+      array_push($artists_album, $artist->id);
+    }
+
+    foreach ($song->artists as $artist) {
+      $album_id = '';
+      $genres_artist = array();
+      $artist = $service->getArtist($artist->id);
+
+      foreach ($artist->genres as $genre) {
+        $term = DcSpotifyHelper::createOrGetTerm($genre, 'genres');
+        array_push($genres, $term->id());
+        array_push($genres_artist, $term->id());
+      }
+
+      if (in_array($artist->id, $artists_album)) {
+        $album_id = $album->id();
+      }
+
+      if ($artist->images) {
+        $picture = $artist->images[0]->url;
+      } else {
+        $picture = '';
+      }
+
+      // Create node object (artist) for each artist in the request body.
+      $artist = DcSpotifyHelper::createNode([
+        'type' => 'artist',
+        'title' => $artist->name,
+        'field_spotify_id' => $artist->id,
+        'field_spotify_link' => $artist->external_urls->spotify,
+        'field_picture' => $picture,
+        'field_albums' => array($album_id),
+        'field_genres' => $genres_artist,
+        'field_followers' => $artist->followers->total,
+      ]);
+
+      array_push($artists, $artist->id());
+    }
+
+    // Create node object (song) for each song in the request body.
+    $song = DcSpotifyHelper::createNode([
+      'type' => 'song',
+      'title' => $song->name,
+      'field_spotify_id' => $song->id,
+      'field_spotify_link' => $song->external_urls->spotify,
+      'field_popularity' => $song->popularity,
+      'field_release_date' => $song->album->release_date,
+      'field_album' => $album->id(),
+      'field_artists' => $artists,
+      'field_genres' => array_unique($genres),
+    ]);
+  }
+}
+
+/**
+ * Implements hook_preprocess_views_view
+ */
+function dc_spotify_preprocess_views_view(&$vars) {
+  // Only use unique IDs for view.
+  if ($vars['view']->id() === 'songs' && $vars['view']->current_display === 'page_1') {
+    if ($vars['rows'][0]['#rows']) {
+      $rows = $vars['rows'][0]['#rows'];
+      $new_rows = [];
+      $used_nids = [];
+      foreach ($rows as $row) {
+        $nid = $row['#node']->nid->value; // Change to the field you want to be unique.
+        if (!in_array($nid, $used_nids)) {
+          $new_rows[] = $row;
+        }
+        $used_nids[] = $nid;
+      }
+      $vars['rows'][0]['#rows'] = $new_rows;
+    }
+  }
+}
+
+/**
+ * Implements hook_install
+ */
+function dc_spotify_install() {
+  $theme_list = [
+    'dc',
+    'gin',
+  ];
+
+  // Install themes.
+  \Drupal::service('theme_installer')->install($theme_list);
+
+  // Get system theme editable configs.
+  $system_theme = \Drupal::configFactory()->getEditable('system.theme');
+
+  // Set default and admin themes.
+  $system_theme
+    ->set('default', $theme_list[0])
+    ->set('admin', $theme_list[1])
+    ->save();
+}

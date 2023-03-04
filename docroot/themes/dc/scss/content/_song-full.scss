@@ -1,0 +1,9 @@
+.node--type-song.node--view-mode-full {
+  .artist a {
+    @extend .btn;
+    @extend .btn-outline-primary;
+    @extend .btn-sm;
+    @extend .my-1;
+    @extend .me-1;
+  }
+}

@@ -1,0 +1,9 @@
+dc-global:
+  css:
+    theme:
+      css/main.css: {}
+  js:
+    js/dc.js: {}
+    node_modules/bootstrap/dist/js/bootstrap.min.js: {}
+  dependencies:
+    - core/jquery

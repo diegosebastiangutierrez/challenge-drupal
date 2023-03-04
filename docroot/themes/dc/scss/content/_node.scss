@@ -1,0 +1,17 @@
+.node--type-song.node--view-mode-full,
+.node--type-artist.node--view-mode-full {
+  .spotify-link {
+    display: block;
+    width: 180px;
+
+    img {
+      border-radius: 1em;
+      width: 100%;
+    }
+  }
+
+  .node-field-picture {
+    border-radius: 1em;
+    max-width: 350px;
+  }
+}

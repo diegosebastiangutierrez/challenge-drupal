@@ -1,0 +1,15 @@
+{
+  "name": "dc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "sass scss:css",
+    "watch:sass": "sass --watch scss:css"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "bootstrap": "^5.2.0",
+    "sass": "^1.54.0"
+  }
+}

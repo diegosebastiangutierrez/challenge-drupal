@@ -1,0 +1,6 @@
+dc_spotify.settings_form:
+  title: 'DC Spotify Settings'
+  route_name: dc_spotify.settings_form
+  description: 'Set a spotify playlist to be imported.'
+  parent: system.admin_config_system
+  weight: 99
