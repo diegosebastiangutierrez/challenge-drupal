@@ -1,0 +1,15 @@
+custom_spotify_app.songs:
+  title: 'Songs'
+  parent: system.admin_content
+  route_name: custom_spotify_app.songs
+
+custom_spotify_app.artists:
+  title: 'Artists'
+  parent: system.admin_content
+  route_name: custom_spotify_app.artists
+
+custom_spotify_app.albums:
+  title: 'Albums'
+  parent: system.admin_content
+  route_name: custom_spotify_app.albums
+

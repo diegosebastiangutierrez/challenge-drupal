@@ -1,0 +1,114 @@
+custom_spotify_app.artist:
+  label: 'Artist'
+  base_table: custom_spotify_app_artist
+  entity_keys:
+    id:
+      type: integer
+      label: 'ID'
+      constraints:
+        - NotNull: {}
+        - Unsigned: {}
+        - Autoincrement: {}
+    label:
+      type: string
+      label: 'Name'
+      constraints:
+        - NotNull: {}
+        - Length:
+            max: 255
+    slug:
+      type: string
+      label: 'Slug'
+      constraints:
+        - NotNull: {}
+        - Length:
+            max: 255
+  handlers:
+    form:
+      default: Drupal\custom_spotify_app\Form\ArtistForm
+    storage:
+      default: Drupal\Core\Entity\Sql\SqlContentEntityStorage
+  links:
+    canonical: /artists/{custom_spotify_app_artist}/view
+    add-page: /artists/add
+    edit-form: /artists/{custom_spotify_app_artist}/edit
+    delete-form: /artists/{custom_spotify_app_artist}/delete
+    collection: /admin/content/artists
+  field_ui_base_route: entity.custom_spotify_app_artist.edit_form
+  admin_permission: 'administer custom_spotify_app artist'
+  bundle_of: custom_spotify_app_album
+
+custom_spotify_app.album:
+  label: 'Album'
+  base_table: custom_spotify_app_album
+  entity_keys:
+    id:
+      type: integer
+      label: 'ID'
+      constraints:
+        - Serial
+    uuid:
+      type: uuid
+      label: 'UUID'
+    label:
+      type: label
+      label: 'Title'
+  bundle_entity_type: custom_spotify_app.album_type
+  handlers:
+    storage:
+      id: entity.custom.storage.sql
+    access:
+      id: entity.custom.access.album
+
+custom_spotify_app.song:
+  label: 'Song'
+  label_plural: 'Songs'
+  description: 'Represents a song obtained from Spotify API'
+  base_table: custom_spotify_app_song
+  data_table: custom_spotify_app_song_field_data
+  revision_table: custom_spotify_app_song_revision
+  translatable: true
+  entity_keys:
+    id:
+      type: integer
+      label: 'ID'
+      constraints:
+        - NotNull: {}
+        - Unsigned: {}
+      generator:
+        type: 'serial'
+        arguments: []
+    uuid:
+      type: uuid
+      label: 'UUID'
+    label:
+      type: label
+      label: 'Label'
+      translatable: true
+    langcode:
+      type: language
+      label: 'Language code'
+    status:
+      type: boolean
+      label: 'Published'
+      default: false
+      translatable: true
+    created:
+      type: created
+      label: 'Created'
+    changed:
+      type: changed
+      label: 'Changed'
+    default_langcode:
+      type: boolean
+      label: 'Default language'
+  links:
+    canonical: canonical
+    edit-form: edit-form
+    delete-form: delete-form
+    collection: /songs
+  bundle_entity_type: custom_spotify_app.song_type
+  field_ui_base_route: entity.custom_spotify_app.song_type.edit_form
+  admin_permission: 'administer custom_spotify_app content'
+  constraints:
+    CustomSpotifyAppSongUniqueFields: {}
