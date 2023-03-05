@@ -19,6 +19,7 @@ use Drupal\node\Entity\NodeType;
  *   An array of base field definitions for the entity type, keyed by field name.
  */
 function custom_spotify_app_entity_base_field_info(EntityType $entity_type) {
+
   $fields = [];
 
   if ($entity_type->id() == 'album') {
@@ -51,63 +52,64 @@ function custom_spotify_app_entity_base_field_info(EntityType $entity_type) {
   ->setDisplayConfigurable('form', TRUE)
   ->setDisplayConfigurable('view', TRUE);
 
-// Add the album artist field.
-$fields['artist'] = BaseFieldDefinition::create('entity_reference')
-  ->setLabel(t('Artist'))
-  ->setDescription(t('The artist of the album.'))
-  ->setSetting('target_type', 'artist')
-  ->setSetting('handler', 'default')
-  ->setDisplayOptions('view', [
-    'label' => 'hidden',
-    'type' => 'entity_reference_label',
-    'weight' => 0,
-  ])
-  ->setDisplayOptions('form', [
-    'type' => 'entity_reference_autocomplete',
-    'weight' => -2,
-    'settings' => [
-      'match_operator' => 'CONTAINS',
-      'size' => '60',
-      'autocomplete_type' => 'tags',
-      'placeholder' => '',
-    ],
-  ])
-  ->setDisplayConfigurable('form', TRUE)
-  ->setDisplayConfigurable('view', TRUE);
+  // Add the album artist field.
+  $fields['artist'] = BaseFieldDefinition::create('entity_reference')
+    ->setLabel(t('Artist'))
+    ->setDescription(t('The artist of the album.'))
+    ->setSetting('target_type', 'artist')
+    ->setSetting('handler', 'default')
+    ->setDisplayOptions('view', [
+      'label' => 'hidden',
+      'type' => 'entity_reference_label',
+      'weight' => 0,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'entity_reference_autocomplete',
+      'weight' => -2,
+      'settings' => [
+        'match_operator' => 'CONTAINS',
+        'size' => '60',
+        'autocomplete_type' => 'tags',
+        'placeholder' => '',
+      ],
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
 
-// Add the album cover image field.
-$fields['cover_image'] = BaseFieldDefinition::create('image')
-  ->setLabel(t('Cover image'))
-  ->setDescription(t('The cover image of the album.'))
-  ->setDefaultValue('')
-  ->setDisplayOptions('view', [
-    'label' => 'hidden',
-    'type' => 'image',
-    'weight' => -1,
-  ])
-  ->setDisplayOptions('form', [
-    'type' => 'image_image',
-    'weight' => -1,
-  ])
-  ->setDisplayConfigurable('form', TRUE)
-  ->setDisplayConfigurable('view', TRUE);
+  // Add the album cover image field.
+  $fields['cover_image'] = BaseFieldDefinition::create('image')
+    ->setLabel(t('Cover image'))
+    ->setDescription(t('The cover image of the album.'))
+    ->setDefaultValue('')
+    ->setDisplayOptions('view', [
+      'label' => 'hidden',
+      'type' => 'image',
+      'weight' => -1,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'image_image',
+      'weight' => -1,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
 
-// Add the album songs field.
-$fields['songs'] = BaseFieldDefinition::create('entity_reference')
-  ->setLabel(t('Songs'))
-  ->setDescription(t('The songs included in the album.'))
-  ->setSetting('target_type', 'song')
-  ->setSetting('handler', 'default')
-  ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED)
-  ->setDisplayOptions('view', [
-    'label' => 'above',
-    'type' => 'entity_reference_label',
-    'weight' => 0,
-  ])
-  ->setDisplayConfigurable('form', TRUE)
-  ->setDisplayConfigurable('view', TRUE);
+  // Add the album songs field.
+  $fields['songs'] = BaseFieldDefinition::create('entity_reference')
+    ->setLabel(t('Songs'))
+    ->setDescription(t('The songs included in the album.'))
+    ->setSetting('target_type', 'song')
+    ->setSetting('handler', 'default')
+    ->setCardinality(BaseFieldDefinition::CARDINALITY_UNLIMITED)
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'type' => 'entity_reference_label',
+      'weight' => 0,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
 
-return $fields;
+  return $fields;
+
 }
 
 class CustomSpotifyAppInstall {
@@ -165,11 +167,15 @@ class CustomSpotifyAppInstall {
    * Uninstalls the module.
    */
   public function uninstall() {
-    // Delete the artist entity type.
-    $this->entityTypeManager->getStorage('entity_type')->delete('artist');
+
+    // Delete the song entity type.
+    $this->entityTypeManager->getStorage('entity_type')->delete('song');
 
     // Delete the album entity type.
     $this->entityTypeManager->getStorage('entity_type')->delete('album');
+
+    // Delete the artist entity type.
+    $this->entityTypeManager->getStorage('entity_type')->delete('artist');
 
     // Flush the cache to make sure the entities are removed.
     $this->entityTypeManager->clearCachedDefinitions();
@@ -179,6 +185,7 @@ class CustomSpotifyAppInstall {
    * Creates the artist entity type.
    */
   protected function createArtistEntityType() {
+
     $this->entityTypeManager->getStorage('entity_type')->create([
       'id' => 'artist',
       'label' => $this->t('Artist'),
@@ -194,11 +201,14 @@ class CustomSpotifyAppInstall {
       'list_builder_class' => 'Drupal\custom_spotify_app\Entity\Controller\ArtistListBuilder',
       'admin_permission' => 'administer artist entities',
     ])->save();
+
   }
- /**
+
+  /**
    * Creates the album entity type.
    */
   protected function createAlbumEntityType() {
+
     $entity_type = $this->entityTypeManager->getDefinition('node');
     $album_entity_type = [
       'label' => $this->t('Album'),
@@ -239,28 +249,29 @@ class CustomSpotifyAppInstall {
     ];
     $album_entity_type_id = 'album';
     $this->entityTypeManager->getStorage('node_type')->create($album_entity_type)->save();
+
   }
-  
-// Create Artist content type.
-$artist_type = NodeType::create([
-  'type' => 'artist',
-  'name' => 'Artist',
-]);
-$artist_type->save();
 
-// Create Album content type.
-$album_type = NodeType::create([
-  'type' => 'album',
-  'name' => 'Album',
-]);
-$album_type->save();
+  // Create Artist content type.
+  $artist_type = NodeType::create([
+    'type' => 'artist',
+    'name' => 'Artist',
+  ]);
+  $artist_type->save();
 
-// Create Song content type.
-$song_type = NodeType::create([
-  'type' => 'song',
-  'name' => 'Song',
-]);
-$song_type->save();
+  // Create Album content type.
+  $album_type = NodeType::create([
+    'type' => 'album',
+    'name' => 'Album',
+  ]);
+  $album_type->save();
+
+  // Create Song content type.
+  $song_type = NodeType::create([
+    'type' => 'song',
+    'name' => 'Song',
+  ]);
+  $song_type->save();
 
 /**
  * Implements hook_install().
@@ -278,3 +289,4 @@ function custom_spotify_app_install() {
   // Create the URL aliases for the Song content type.
   \Drupal::service('path.alias_storage')->save('/node/{node}', '/artists/[node:field_artist]/album/[node:field_album]/songs/[node:title]', 'en', 'default', NULL);
 }
+

@@ -5,10 +5,15 @@ spotify_api_settings:
     client_id:
       type: string
       label: 'Client ID'
+      value:
+        - ''
     client_secret:
       type: string
       label: 'Client Secret'
+      value:
+        - ''
     cache_time:
       type: integer
       label: 'Cache Time'
-
+      value:
+        - 3600
