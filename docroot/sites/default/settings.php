@@ -299,7 +299,7 @@ $settings['install_profile'] = 'standard';
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'ts3MpgAEZcYSm0_tCkJgrYiEMg1rRSHPzyrXRHLGTg7uBOHXRojaOnIfu1sQJO4hWxZVGJSqTA';
+$settings['hash_salt'] = 'fudl8Wb9firWx4uuAfx-B4xReSzbkC4_sBXcRZbEt9GdK54kBQOXIWtM_Hhy3vyAQxzLxIBegw';
 
 /**
  * Deployment identifier.
@@ -748,6 +748,10 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  * example.org, with all subdomains included.
  */
 
+$settings['trusted_host_patterns'] = array(
+  '^challenge-drupal\.devel$',
+);
+
 /**
  * The default list of directories that will be ignored by Drupal's file API.
  *
@@ -787,3 +791,13 @@ $settings['entity_update_batch_size'] = 50;
 if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
   include $app_root . '/' . $site_path . '/settings.local.php';
 }
+$databases['default']['default'] = array (
+  'database' => 'challenge-drupal',
+  'username' => 'root',
+  'password' => 'yugo7fuego',
+  'prefix' => '',
+  'host' => 'mariadb.devel',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);

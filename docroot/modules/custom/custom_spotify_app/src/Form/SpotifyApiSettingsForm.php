@@ -39,12 +39,21 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Spotify API credentials'),
     ];
 
-    // Add the Spotify API client ID field.
+    // Add the Spotify API Client ID field.
     $form['spotify_api_credentials']['client_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Client ID'),
       '#description' => $this->t('Enter your Spotify App Client ID.'),
       '#default_value' => $config->get('client_id'),
+      '#required' => TRUE,
+    ];
+
+    // Add the Spotify API Client Secret field.
+    $form['spotify_api_credentials']['client_secret'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Client Secret'),
+      '#description' => $this->t('Enter your Spotify App Client Secret.'),
+      '#default_value' => $config->get('client_secret'),
       '#required' => TRUE,
     ];
 
