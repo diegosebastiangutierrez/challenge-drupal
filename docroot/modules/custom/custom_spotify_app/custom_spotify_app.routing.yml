@@ -32,6 +32,7 @@ custom_spotify_app.albums:
 
 custom_spotify_app.admin_settings:
   path: '/admin/config/services/custom-spotify-app'
+  parent: 'system.admin_config_services'
   defaults:
     _form: '\Drupal\custom_spotify_app\Form\SpotifyApiSettingsForm'
     _title: 'Custom Spotify App module settings'

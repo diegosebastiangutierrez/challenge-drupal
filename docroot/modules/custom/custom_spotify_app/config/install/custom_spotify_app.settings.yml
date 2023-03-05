@@ -1,3 +1,6 @@
 client_id: '1bccca894a2b4c9d80b11b3c063010e0'
 client_secret: 'a9c5b03611304597a364ca06ba5413a8'
+access_token: ''
+spotify_access_token_created_at: 0
+spotify_access_token_expiration_time: 0
 cache_time: 3600

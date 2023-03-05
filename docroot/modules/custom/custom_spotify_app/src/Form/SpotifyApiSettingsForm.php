@@ -48,12 +48,29 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
-    // Add the Spotify API client secret field.
-    $form['spotify_api_credentials']['client_secret'] = [
+    // Add the Spotify API access token field.
+    $form['spotify_api_credentials']['access_token'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Client Secret'),
-      '#description' => $this->t('Enter your Spotify App Client Secret.'),
-      '#default_value' => $config->get('client_secret'),
+      '#title' => $this->t('Access Token'),
+      '#description' => $this->t('Your Spotify App Access Token.'),
+      '#default_value' => $config->get('access_token'),
+      '#required' => TRUE,
+    ];
+
+    // Add the Spotify API token created at field.
+    $form['spotify_api_credentials']['spotify_access_token_created_at'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Token Creation Time'),
+      '#description' => $this->t('Your Spotify App Access Token Creation Time.'),
+      '#default_value' => $config->get('spotify_access_token_created_at'),
+      '#required' => TRUE,
+    ];
+    // Add the Spotify API Access Token Expiration field.
+    $form['spotify_api_credentials']['spotify_access_token_expiration_time'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Access Token Expiration'),
+      '#description' => $this->t('Your Spotify App Access Token Expiration Time.'),
+      '#default_value' => $config->get('spotify_access_token_expiration_time'),
       '#required' => TRUE,
     ];
 
