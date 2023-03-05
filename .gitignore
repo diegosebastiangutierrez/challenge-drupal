@@ -11,7 +11,10 @@ docroot/core
 docroot/vendor
 docroot/libraries
 docroot/profiles
+docroot/profiles/README.txt
 docroot/sites/all
+docroot/modules/README.txt
+docroot/themes/README.txt
 docroot/modules/contrib/
 docroot/themes/contrib/
 filecache/
