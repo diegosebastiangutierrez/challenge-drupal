@@ -23,7 +23,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   protected function getEditableConfigNames() {
-    return ['spotify_api_settings'];
+    return ['custom_spotify_app.settings'];
   }
 
   /**
@@ -72,21 +72,6 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#required' => TRUE,
     ];
 
-    // Add a select field for the caching backend.
-    $form['caching_settings']['caching_backend'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Caching backend'),
-      '#description' => $this->t('Select the caching backend to use.'),
-      '#options' => [
-        'cache.backend.apcu' => $this->t('APCu'),
-        'cache.backend.database' => $this->t('Database'),
-        'cache.backend.memcache' => $this->t('Memcached'),
-        'cache.backend.memory' => $this->t('Memory'),
-      ],
-      '#default_value' => $config->get('caching_backend'),
-      '#required' => TRUE,
-    ];
-
     // Add a submit button to save the form values.
     $form['submit'] = [
       '#type' => 'submit',
@@ -95,3 +80,5 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     return $form;
   }
+
+}

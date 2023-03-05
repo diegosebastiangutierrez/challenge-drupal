@@ -22,10 +22,18 @@ custom_spotify_app.songs:
   requirements:
     _permission: 'access content'
 
-custom_spotify_app.settings:
+custom_spotify_app.albums:
+  path: '/albums'
+  defaults:
+    _controller: '\Drupal\custom_spotify_app\Controller\CustomSpotifyAlbumsController::list'
+    _title: 'Albums'
+  requirements:
+    _permission: 'access content'
+
+custom_spotify_app.admin_settings:
   path: '/admin/config/services/custom-spotify-app'
   defaults:
-    _form: '\Drupal\custom_spotify_app\Form\SpotifyArtistController::settingsForm'
+    _form: '\Drupal\custom_spotify_app\Form\SpotifyApiSettingsForm'
     _title: 'Custom Spotify App module settings'
   requirements:
     _permission: 'administer site configuration'

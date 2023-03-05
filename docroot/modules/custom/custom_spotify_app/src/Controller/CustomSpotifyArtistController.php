@@ -14,17 +14,5 @@ class CustomSpotifyArtistController extends ControllerBase {
     return new Response('Hello, Spotify Artist!');
   }
 
-  /**
-   * Returns the Spotify Artist module settings form.
-   */
-  public function settingsForm() {
-    $form = [
-      '#type' => 'markup',
-      '#markup' => $this->t('Configure the Spotify Artist module settings here.'),
-    ];
-
-    return $form;
-  }
-
 }
 

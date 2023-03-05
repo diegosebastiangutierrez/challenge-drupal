@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a controller for songs.
  */
-class CustomSongsController extends ControllerBase {
+class CustomSpotifySongsController extends ControllerBase {
 
   /**
    * The entity type manager.

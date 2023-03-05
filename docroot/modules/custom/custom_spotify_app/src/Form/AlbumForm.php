@@ -107,9 +107,4 @@ class AlbumForm extends ContentEntityForm {
     return $form;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-
-
 }

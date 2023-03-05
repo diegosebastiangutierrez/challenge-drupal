@@ -3,8 +3,11 @@ type: module
 description: 'A Drupal 9 module that integrates with the Spotify API to display artist information.'
 core_version_requirement: ^8 || ^9
 package: Custom
+
 dependencies:
   - block
   - config
   - views
   - pathauto
+
+configure: custom_spotify_app.admin_settings
