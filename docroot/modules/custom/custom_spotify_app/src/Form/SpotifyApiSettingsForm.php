@@ -104,7 +104,80 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#value' => $this->t('Save'),
     ];
 
+    // Add a submit button to save the form values.
+    $form['import'] = [
+      '#type' => 'submit',
+      '#value' => $this->t('Import New Content'),
+      '#submit' => array('crawl_new_info'),
+    ];
+
     return $form;
+  }
+
+    /**
+   * Custom function to scrap and update artist, album and song information.
+   */
+  public function crawl_new_info(array &$form, FormStateInterface $form_state) {
+    // Retrieve the API credentials from the module settings.
+    $client_id = \Drupal::config('custom_spotify_app.settings')->get('client_id');
+    $client_secret = \Drupal::config('custom_spotify_app.settings')->get('client_secret');
+
+    // Initialize the Spotify API client.
+    $api = new \SpotifyWebAPI\SpotifyWebAPI();
+    $session = new \SpotifyWebAPI\Session($client_id, $client_secret);
+    $api->setAccessToken($session->getAccessToken());
+
+    // Define the number of artists to retrieve.
+    $artist_limit = 20;
+
+    // Retrieve a list of artists from the Spotify API.
+    $artists = $api->search('artist', 'spotify', ['limit' => $artist_limit])->artists->items;
+
+    // Loop through each artist and create an "Artist" node.
+    foreach ($artists as $artist) {
+      $node = \Drupal::entityTypeManager()->getStorage('node')->create([
+        'type' => 'artist',
+        'title' => $artist->name,
+      ]);
+      $node->set('field_artist_id', $artist->id);
+      $node->set('field_artist_image', $artist->images[0]->url);
+      $node->set('field_artist_genres', $artist->genres);
+      $node->set('field_artist_popularity', $artist->popularity);
+      $node->save();
+
+      // Retrieve the albums for the current artist.
+      $albums = $api->getArtistAlbums($artist->id, ['limit' => 50])->items;
+
+      // Loop through each album and create an "Album" node.
+      foreach ($albums as $album) {
+        $album_node = \Drupal::entityTypeManager()->getStorage('node')->create([
+          'type' => 'album',
+          'title' => $album->name,
+        ]);
+        $album_node->set('field_album_id', $album->id);
+        $album_node->set('field_album_artist', $node->id());
+        $album_node->set('field_album_image', $album->images[0]->url);
+        $album_node->set('field_album_release_date', $album->release_date);
+        $album_node->save();
+
+        // Retrieve the tracks for the current album.
+        $albumTracks = $this->spotifyService->getAlbumTracks($album['id']);
+
+        // Loop through the tracks and create a Song node for each one.
+        foreach ($albumTracks['items'] as $song) {
+          $song_node = $this->nodeStorage->create([
+            'type' => 'song',
+            'title' => $song['name'],
+            'field_song_duration' => $song['duration_ms'],
+            'field_song_preview_url' => $song['preview_url'],
+            'field_song_album' => $album_node,
+          ]);
+
+          // Save the Song node.
+          $song_node->save();
+        }
+      }
+    }
   }
 
 }
