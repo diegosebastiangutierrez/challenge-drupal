@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
 
 /**
  * Implements hook_help().
@@ -44,9 +46,9 @@ function custom_spotify_app_entity_bundle_create(Drupal\Core\Entity\EntityTypeIn
 /**
  * Implements hook_form_system_config_form_alter().
  */
-function custom_spotify_app_form_system_config_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  if ($form_id == 'system_theme_settings') {
-    $form['spotify']['scrap_update'] = [
+function custom_spotify_app_spotify_api_settings_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'spotify_api_settings') {
+    $form['actions']['scrap_update'] = [
       '#type' => 'submit',
       '#value' => t('Scrap and Update Info'),
       '#submit' => ['::custom_spotify_app_scrap_and_update_info'],
@@ -105,16 +107,16 @@ function custom_spotify_app_scrap_and_update_info(array &$form, FormStateInterfa
 
       // Loop through the tracks and create a Song node for each one.
       foreach ($albumTracks['items'] as $song) {
-        $songNode = $this->nodeStorage->create([
+        $song_node = $this->nodeStorage->create([
           'type' => 'song',
           'title' => $song['name'],
           'field_song_duration' => $song['duration_ms'],
           'field_song_preview_url' => $song['preview_url'],
-          'field_song_album' => $albumNode,
+          'field_song_album' => $album_node,
         ]);
 
         // Save the Song node.
-        $songNode->save();
+        $song_node->save();
       }
     }
   }

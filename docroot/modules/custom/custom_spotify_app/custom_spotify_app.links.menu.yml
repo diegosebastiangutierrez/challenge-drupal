@@ -12,3 +12,11 @@ custom_spotify_app.albums:
   title: 'Albums'
   parent: system.admin_content
   route_name: custom_spotify_app.albums
+
+custom_spotify_app.admin:
+  title: 'Spotify API Settings'
+  description: 'Custom Module Setup'
+  parent: system.admin_config_services
+  route_name: custom_spotify_app.admin_settings
+  weight: 100
+  enabled: 1

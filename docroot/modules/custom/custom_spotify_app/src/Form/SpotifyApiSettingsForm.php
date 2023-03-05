@@ -63,7 +63,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Access Token'),
       '#description' => $this->t('Your Spotify App Access Token.'),
       '#default_value' => $config->get('access_token'),
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     // Add the Spotify API token created at field.
@@ -72,7 +72,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Token Creation Time'),
       '#description' => $this->t('Your Spotify App Access Token Creation Time.'),
       '#default_value' => $config->get('spotify_access_token_created_at'),
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
     // Add the Spotify API Access Token Expiration field.
     $form['spotify_api_credentials']['spotify_access_token_expiration_time'] = [
@@ -80,7 +80,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Access Token Expiration'),
       '#description' => $this->t('Your Spotify App Access Token Expiration Time.'),
       '#default_value' => $config->get('spotify_access_token_expiration_time'),
-      '#required' => TRUE,
+      '#required' => FALSE,
     ];
 
     // Add a fieldset to the form for the caching settings.
