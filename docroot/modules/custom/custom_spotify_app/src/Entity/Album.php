@@ -5,6 +5,7 @@ namespace Drupal\custom_spotify_app\Entity;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\ContentEntityInterface;
 
 /**
  * Defines the Album entity.
@@ -21,7 +22,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
  *   },
  * )
  */
-class Album extends ContentEntityBase {
+class Album extends ContentEntityBase implements ContentEntityInterface{
 
   /**
    * {@inheritdoc}
@@ -62,6 +63,5 @@ class Album extends ContentEntityBase {
 
     return $songs;
   }
-
 
 }
