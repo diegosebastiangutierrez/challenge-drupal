@@ -12,4 +12,3 @@ custom_spotify_app.albums:
   title: 'Albums'
   parent: system.admin_content
   route_name: custom_spotify_app.albums
-

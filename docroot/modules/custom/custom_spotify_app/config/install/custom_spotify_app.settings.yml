@@ -6,12 +6,12 @@ spotify_api_settings:
       type: string
       label: 'Client ID'
       value:
-        - ''
+        - '1bccca894a2b4c9d80b11b3c063010e0'
     client_secret:
       type: string
       label: 'Client Secret'
       value:
-        - ''
+        - 'a9c5b03611304597a364ca06ba5413a8'
     cache_time:
       type: integer
       label: 'Cache Time'
