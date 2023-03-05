@@ -4,5 +4,7 @@ description: Theme for Drupal Challange
 type: theme
 core: 8.x
 logo: 'logo.png'
+base theme: classy
+
 libraries:
   - dc/dc-global

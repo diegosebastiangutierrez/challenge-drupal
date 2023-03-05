@@ -11,8 +11,7 @@ class CustomSpotifyArtistController extends ControllerBase {
    * Returns the Spotify Artist page.
    */
   public function artistPage() {
-    return new Response('Hello, Spotify Artist!');
+    return new Response('Hello, Spotify Artists (Plural)!');
   }
 
 }
-

@@ -251,10 +251,6 @@ $databases = array();
  *   );
  * @endcode
  */
-$config_directories = array(
-    CONFIG_SYNC_DIRECTORY => dirname($app_root) . '/config/' . basename($site_path),
-);
-
 /**
  * Settings:
  *
@@ -801,3 +797,6 @@ $databases['default']['default'] = array (
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
+
+
+$settings['config_sync_directory'] = 'sites/default/files/sync';

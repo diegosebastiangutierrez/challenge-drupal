@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CustomSpotifyArtistsController extends ControllerBase {
 
   /**
-   * Returns the Spotify Artist page.
+   * Returns the Spotify Artist list page.
    */
   public function list() {
     return new Response('Hello, Spotify Artist List!');
@@ -18,8 +18,7 @@ class CustomSpotifyArtistsController extends ControllerBase {
    * Returns the Spotify Artist page.
    */
   public function detail() {
-    return new Response('Hello, Spotify Artist!');
+    return new Response('Hello, Spotify Artist Detail!');
   }
 
 }
-

@@ -8,13 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 class CustomSpotifyAppController extends ControllerBase {
 
   /**
-   * Returns the Spotify Artist page.
-   */
-  public function artistPage() {
-    return new Response('Hello, Spotify Artist!');
-  }
-
-  /**
    * Returns the Spotify Artist module settings form.
    */
   public function settingsForm() {
@@ -27,4 +20,3 @@ class CustomSpotifyAppController extends ControllerBase {
   }
 
 }
-

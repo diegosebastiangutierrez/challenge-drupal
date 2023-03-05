@@ -2,4 +2,4 @@ name: Spotify Theme
 type: theme
 description: A custom theme for displaying the home page, songs page, artists page, album details page and song page.
 core_version_requirement: ^8 || ^9
-base_theme: classy
+base theme: classy
