@@ -16,7 +16,6 @@ use SpotifyWebAPI\SpotifyWebAPI;
  */
 class SpotifyApiSettingsForm extends ConfigFormBase {
 
-
   /**
    * Config settings.
    *
@@ -24,12 +23,13 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
    */
   const SETTINGS = 'custom_spotify_app.settings';
 
+  protected $SpotifyService;
 
   /**
    * Class Constructor
    */
 
-  public function __construct(ConfigFactoryInterface $config_factory){
+  public function __construct(ConfigFactoryInterface $config_factory) {
     parent::__construct($config_factory);
   }
 
@@ -38,7 +38,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('config.factory')
+      $container->get('config.factory'),
+      $container->get('custom_spotify_app.api_service'),
     );
   }
 
@@ -165,7 +166,6 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     ];
 
     return parent::buildForm($form, $form_state);
-
   }
 
 
@@ -192,18 +192,16 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
 
-    if(!$form_state->getValue('spotify_access_token')){
-      $serv = \Drupal::service('custom_spotify_app.api_service');
-      $serv->auth();
+    if (!$form_state->getValue('spotify_access_token')) {
+      $service = \Drupal::service('custom_spotify_app.api_service');
+      $service->auth();
     }
-
   }
 
-    /**
+  /**
    * Custom function to scrap and update artist, album and song information.
    */
-  public function crawl_new_info(array &$form, FormStateInterface $form_state) {
-
+  public function crawl_new_info() {
 
     $config = $this->config('custom_spotify_app.settings');
 
@@ -212,14 +210,12 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     $client_secret = \Drupal::config('custom_spotify_app.settings')->get('spotify_client_secret');
 
     // Initialize the Spotify API client.
-    $api = new \SpotifyWebAPI\SpotifyWebAPI();
-    $session = new \SpotifyWebAPI\Session($client_id, $client_secret);
+    $api = new SpotifyWebAPI();
+    $session = new Session($client_id, $client_secret);
     $session->requestCredentialsToken();
     $accessToken = $session->getAccessToken();
 
-
-
-    //$api->setAccessToken($session->getAccessToken());
+    $api->setAccessToken($session->getAccessToken());
 
     // Define the number of artists to retrieve.
     $query_limit = \Drupal::config('custom_spotify_app.settings')->get('spotify_api_query_limit');
@@ -255,7 +251,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
         $album_node->save();
 
         // Retrieve the tracks for the current album.
-        $albumTracks = $this->spotifyService->getAlbumTracks($album['id']);
+        $albumTracks = $this->api->getAlbumTracks($album['id']);
 
         // Loop through the tracks and create a Song node for each one.
         foreach ($albumTracks['items'] as $song) {
@@ -273,5 +269,4 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       }
     }
   }
-
 }

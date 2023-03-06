@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\custom_spotify;
+namespace Drupal\custom_spotify_app;
 
 use DateTime;
 use Drupal\Core\Config\ConfigFactory;
@@ -90,12 +90,13 @@ class SpotifyService {
    *  The response body with all songs or with errors.
    */
   function getNewReleases() {
-    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/browse/new-releases?limit='. $this->getApiQueryLimit() .'&offset=' . $this->getApiQueryOffset() , [
+    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/browse/new-releases?limit=' . $this->getApiQueryLimit() . '&offset=' . $this->getApiQueryOffset(), [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
       ],
       'query' => [
-        'limit' => 50,
+        'limit' => $this->getApiQueryLimit(),
+        'offset' => $this->getApiQueryOffset()
       ],
     ]);
 
@@ -224,7 +225,7 @@ class SpotifyService {
    * Get the current api query limit.
    *
    */
-  function getApiQueryLimit(){
+  function getApiQueryLimit() {
     return $this->config_factory->get('spotify_api_query_limit');
   }
 
@@ -232,8 +233,7 @@ class SpotifyService {
    * Get the current api query limit.
    *
    */
-  function getApiQueryOffset(){
+  function getApiQueryOffset() {
     return $this->config_factory->get('spotify_api_query_offset');
   }
-
 }
