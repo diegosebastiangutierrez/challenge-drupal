@@ -1,0 +1,6 @@
+services:
+  # my service definition.
+  custom_spotify_app.api_service:
+    class: Drupal\custom_spotify_app\SpotifyService
+    # add the HTTP client service as the service argument
+    arguments: ['@http_client', '@config.factory']

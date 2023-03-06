@@ -107,4 +107,7 @@ class TopSongsBlock extends BlockBase implements ContainerFactoryPluginInterface
    *   An array of Spotify track objects.
    */
   protected function getTopSongs() {
-    $options
+
+  }
+
+}

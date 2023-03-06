@@ -60,11 +60,11 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     ];
 
     // Add the Spotify API access token field.
-    $form['spotify_api_credentials']['access_token'] = [
+    $form['spotify_api_credentials']['spotify_access_token'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Access Token'),
       '#description' => $this->t('Your Spotify App Access Token.'),
-      '#default_value' => $config->get('access_token'),
+      '#default_value' => $config->get('spotify_access_token'),
       '#required' => FALSE,
     ];
 
@@ -82,6 +82,30 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Access Token Expiration'),
       '#description' => $this->t('Your Spotify App Access Token Expiration Time.'),
       '#default_value' => $config->get('spotify_access_token_expiration_time'),
+      '#required' => FALSE,
+    ];
+
+    // Add a fieldset to the form for the Spotify API credentials.
+    $form['spotify_api_limits'] = [
+      '#type' => 'fieldset',
+      '#title' => $this->t('Spotify API Limits'),
+    ];
+
+    // Add the Spotify API Query Limit field.
+    $form['spotify_api_limits']['api_query_limit'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('API Query Limit'),
+      '#description' => $this->t('Your Spotify API Query Limit.'),
+      '#default_value' => $config->get('api_query_limit'),
+      '#required' => FALSE,
+    ];
+
+    // Add the Spotify API Query Offset field.
+    $form['spotify_api_limits']['api_query_offset'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('API Query Offset'),
+      '#description' => $this->t('Your Spotify API Query Offset.'),
+      '#default_value' => $config->get('api_query_offset'),
       '#required' => FALSE,
     ];
 
