@@ -12,6 +12,10 @@
         {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "path",
+            "url": "modules/custom/custom_spotify_app"
         }
     ],
     "require": {
@@ -20,7 +24,8 @@
         "drupal/core-composer-scaffold": "9.5.4",
         "drupal/core-project-message": "9.5.4",
         "drupal/core-recommended": "9.5.4",
-        "drupal/core-vendor-hardening": "^8.8"
+        "drupal/core-vendor-hardening": "^8.8",
+        "drupal/custom_spotify_app": "dev-main"
     },
     "conflict": {
         "drupal/drupal": "*"
