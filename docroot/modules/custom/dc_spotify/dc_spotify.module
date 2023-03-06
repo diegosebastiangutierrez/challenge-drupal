@@ -124,7 +124,7 @@ function dc_spotify_preprocess_views_view(&$vars) {
 function dc_spotify_install() {
   $theme_list = [
     'dc',
-    'gin',
+//    'gin',
   ];
 
   // Install themes.
@@ -136,6 +136,6 @@ function dc_spotify_install() {
   // Set default and admin themes.
   $system_theme
     ->set('default', $theme_list[0])
-    ->set('admin', $theme_list[1])
+  //  ->set('admin', $theme_list[1])
     ->save();
 }
