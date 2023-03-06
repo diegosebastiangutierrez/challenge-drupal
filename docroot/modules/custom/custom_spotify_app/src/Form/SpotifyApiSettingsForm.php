@@ -4,7 +4,8 @@ namespace Drupal\custom_spotify_app\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use  SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\Session;
+use SpotifyWebAPI\SpotifyWebAPI;
 
 /**
  * Class SpotifyApiSettingsForm.
