@@ -1,17 +1,26 @@
-custom_spotify_app.songs:
-  title: 'Songs'
-  parent: system.admin_content
-  route_name: custom_spotify_app.songs
-
 custom_spotify_app.artists:
   title: 'Artists'
-  parent: system.admin_content
+  parent: main
+  menu_name: main
+  enabled: 1
+  weight: 50
   route_name: custom_spotify_app.artists
 
 custom_spotify_app.albums:
   title: 'Albums'
-  parent: system.admin_content
+  parent: main
+  menu_name: main
+  enabled: 1
+  weight: 60
   route_name: custom_spotify_app.albums
+
+custom_spotify_app.songs:
+  title: 'Songs'
+  parent: main
+  menu_name: main
+  enabled: 1
+  weight: 70
+  route_name: custom_spotify_app.songs
 
 custom_spotify_app.admin:
   title: 'Spotify API Settings'
