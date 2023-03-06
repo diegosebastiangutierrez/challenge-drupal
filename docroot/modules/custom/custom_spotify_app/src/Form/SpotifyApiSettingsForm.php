@@ -193,8 +193,11 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     parent::validateForm($form, $form_state);
 
     if (!$form_state->getValue('spotify_access_token')) {
-      $service = \Drupal::service('custom_spotify_app.api_service');
-      $service->auth();
+      $service = \Drupal::service('custom_spotify_app.api_service')->auth();
+
+      $form_state->setValue('spotify_access_token', $service->access_token);
+      $form_state->setRebuild();
+
     }
   }
 
