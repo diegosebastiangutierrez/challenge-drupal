@@ -217,14 +217,15 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     $api->setAccessToken($session->getAccessToken());
 
-    // Define the number of artists to retrieve.
-    $query_limit = \Drupal::config('custom_spotify_app.settings')->get('spotify_api_query_limit');
 
     // Retrieve a list of artists from the Spotify API.
-    $artists = $api->search('artist', 'spotify', ['limit' => $query_limit])->artists->items;
+    $contents = $api->getNewReleases();
 
-    // Loop through each artist and create an "Artist" node.
-    foreach ($artists as $artist) {
+    // var_export($contents);die();
+
+    //Loop through each item
+    foreach ($contents as $song) {
+
       $node = \Drupal::entityTypeManager()->getStorage('node')->create([
         'type' => 'artist',
         'title' => $artist->name,
@@ -236,10 +237,11 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       $node->save();
 
       // Retrieve the albums for the current artist.
-      $albums = $api->getArtistAlbums($artist->id, ['limit' => 50])->items;
+      $albums = $api->getArtistAlbums($artist->id)->items;
 
       // Loop through each album and create an "Album" node.
       foreach ($albums as $album) {
+
         $album_node = \Drupal::entityTypeManager()->getStorage('node')->create([
           'type' => 'album',
           'title' => $album->name,
@@ -249,6 +251,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
         $album_node->set('field_album_image', $album->images[0]->url);
         $album_node->set('field_album_release_date', $album->release_date);
         $album_node->save();
+
 
         // Retrieve the tracks for the current album.
         $albumTracks = $this->api->getAlbumTracks($album['id']);
