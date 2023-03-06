@@ -6,11 +6,27 @@
 
 * Esto iniciará el ambiente y sus containers.
 * Se crearán las instancias necesarias para el proyecto en Docker.
-* Se levanta la base de datos. Pueden hacer un import de la base de datos inicial, o de la base de datos completa.
-En el caso de levantar la base de datos inicial:
+* Se levanta la base de datos. Pueden hacer un import de la base de datos inicial
+
+** Editar el archivo settings.php de sites/default y agregar los datos de conexion a la base de datos
+** Ingresar en el directorio sites/default/files y crear la carpeta "sync"
+* En el caso de levantar la base de datos inicial (para no realizar instalacion limpia):
+
+- Ingresar en el directorio raiz del proyecto
+- Ejecutar en terminal:
+
+'tar -xvf drupal-initial.tgz'
+
+- Esto descomprime el archivo del dump de la base de datos
+
+- Luego ejecutar:
+
+'mysql -u root -p challenge-drupal < mariadb-init/drupal-initial.sql'
 
 - Ingresar en el directorio docroot/
 - Ejecutar en terminal:
+
+'composer install'
 
 'drush en custom_spotify_app'
 
@@ -25,4 +41,4 @@ Esto habilita el módulo creado.
     * client_id = 1bccca894a2b4c9d80b11b3c063010e0
     * client_secret = a9c5b03611304597a364ca06ba5413a8
     * cache_time = 3600
-- 
+-
