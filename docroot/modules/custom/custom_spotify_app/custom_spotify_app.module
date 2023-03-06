@@ -42,3 +42,29 @@ function custom_spotify_app_entity_bundle_create(EntityTypeInterface $entity_typ
     $field_definition->save();
   }
 }
+
+/**
+ * Implements hook_install
+ */
+function custom_spotify_app_install() {
+  $theme_list = [
+    'olivero',
+    'claro',
+  ];
+
+  // Install themes.
+  \Drupal::service('theme_installer')->install($theme_list);
+
+  // Uninstall themes.
+  \Drupal::service('theme_installer')->uninstall(['seven']);
+
+  // Get system theme editable configs.
+  $system_theme = \Drupal::configFactory()->getEditable('system.theme');
+
+  // Set default and admin themes.
+  $system_theme
+    ->set('default', $theme_list[0])
+    ->set('admin', $theme_list[1])
+    ->save();
+}
+
