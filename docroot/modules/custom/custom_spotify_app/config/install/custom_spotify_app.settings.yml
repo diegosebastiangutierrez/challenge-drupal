@@ -3,6 +3,6 @@ spotify_client_secret: 'a9c5b03611304597a364ca06ba5413a8'
 spotify_access_token: ''
 spotify_access_token_created_at: 0
 spotify_access_token_expiration_time: 0
-spotify_api_query_limit: 50
+spotify_api_query_limit: 20
 spotify_api_query_offset: 0
 caching_time: 3600

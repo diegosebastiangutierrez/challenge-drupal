@@ -84,19 +84,20 @@ class SpotifyService {
   }
 
   /**
-   * Get all tracks.
+   * Get New Releases.
    *
    * @return array
    *  The response body with all songs or with errors.
    */
   function getNewReleases() {
-    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/browse/new-releases?limit=' . $this->getApiQueryLimit() . '&offset=' . $this->getApiQueryOffset(), [
+    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/browse/new-releases', [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
       ],
       'query' => [
         'limit' => $this->getApiQueryLimit(),
-        'offset' => $this->getApiQueryOffset()
+        'offset' => $this->getApiQueryOffset(),
+        'country' => 'AR'
       ],
     ]);
 
@@ -130,6 +131,57 @@ class SpotifyService {
 
     $artist = json_decode($request->getBody()->getContents());
     return $artist;
+  }
+
+  function getArtistAlbums($artist_id){
+
+    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/artists/' . $artist_id .'/albums', [
+      'headers' => [
+        'Authorization' => 'Bearer ' . $this->getAccessToken(),
+      ],
+    ]);
+
+    if ($request->getStatusCode() != 200) {
+      return $request;
+    }
+
+    $albums = json_decode($request->getBody()->getContents());
+    return $albums;
+
+  }
+
+  function getAlbum($album_id){
+
+    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/albums/' . $album_id, [
+      'headers' => [
+        'Authorization' => 'Bearer ' . $this->getAccessToken(),
+      ],
+    ]);
+
+    if ($request->getStatusCode() != 200) {
+      return $request;
+    }
+
+    $album = json_decode($request->getBody()->getContents());
+    return $album;
+
+  }
+
+  function getAlbumTracks($album_id){
+
+    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/albums/' . $album_id .'/tracks', [
+      'headers' => [
+        'Authorization' => 'Bearer ' . $this->getAccessToken(),
+      ],
+    ]);
+
+    if ($request->getStatusCode() != 200) {
+      return $request;
+    }
+
+    $tracks = json_decode($request->getBody()->getContents());
+    return $tracks;
+
   }
 
   /**
