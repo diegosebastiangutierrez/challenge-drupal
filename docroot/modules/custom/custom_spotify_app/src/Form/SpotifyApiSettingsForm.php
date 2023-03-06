@@ -4,6 +4,7 @@ namespace Drupal\custom_spotify_app\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use  SpotifyWebAPI\SpotifyWebAPI;
 
 /**
  * Class SpotifyApiSettingsForm.
@@ -108,7 +109,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     $form['import'] = [
       '#type' => 'submit',
       '#value' => $this->t('Import New Content'),
-      '#submit' => array('crawl_new_info'),
+      '#submit' => array('::crawl_new_info'),
     ];
 
     return $form;
