@@ -42,20 +42,20 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     ];
 
     // Add the Spotify API Client ID field.
-    $form['spotify_api_credentials']['client_id'] = [
+    $form['spotify_api_credentials']['spotify_client_id'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Client ID'),
       '#description' => $this->t('Enter your Spotify App Client ID.'),
-      '#default_value' => $config->get('client_id'),
+      '#default_value' => $config->get('spotify_client_id'),
       '#required' => TRUE,
     ];
 
     // Add the Spotify API Client Secret field.
-    $form['spotify_api_credentials']['client_secret'] = [
+    $form['spotify_api_credentials']['spotify_client_secret'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Client Secret'),
       '#description' => $this->t('Enter your Spotify App Client Secret.'),
-      '#default_value' => $config->get('client_secret'),
+      '#default_value' => $config->get('spotify_client_secret'),
       '#required' => TRUE,
     ];
 
@@ -92,20 +92,20 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     ];
 
     // Add the Spotify API Query Limit field.
-    $form['spotify_api_limits']['api_query_limit'] = [
+    $form['spotify_api_limits']['spotify_api_query_limit'] = [
       '#type' => 'textfield',
       '#title' => $this->t('API Query Limit'),
       '#description' => $this->t('Your Spotify API Query Limit.'),
-      '#default_value' => $config->get('api_query_limit'),
+      '#default_value' => $config->get('spotify_api_query_limit'),
       '#required' => FALSE,
     ];
 
     // Add the Spotify API Query Offset field.
-    $form['spotify_api_limits']['api_query_offset'] = [
+    $form['spotify_api_limits']['spotify_api_query_offset'] = [
       '#type' => 'textfield',
       '#title' => $this->t('API Query Offset'),
       '#description' => $this->t('Your Spotify API Query Offset.'),
-      '#default_value' => $config->get('api_query_offset'),
+      '#default_value' => $config->get('spotify_api_query_offset'),
       '#required' => FALSE,
     ];
 
@@ -145,8 +145,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
    */
   public function crawl_new_info(array &$form, FormStateInterface $form_state) {
     // Retrieve the API credentials from the module settings.
-    $client_id = \Drupal::config('custom_spotify_app.settings')->get('client_id');
-    $client_secret = \Drupal::config('custom_spotify_app.settings')->get('client_secret');
+    $client_id = \Drupal::config('custom_spotify_app.settings')->get('spotify_client_id');
+    $client_secret = \Drupal::config('custom_spotify_app.settings')->get('spotify_client_secret');
 
     // Initialize the Spotify API client.
     $api = new \SpotifyWebAPI\SpotifyWebAPI();
@@ -154,7 +154,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     $api->setAccessToken($session->getAccessToken());
 
     // Define the number of artists to retrieve.
-    $artist_limit = 20;
+    $artist_limit = \Drupal::config('custom_spotify_app.settings')->get('spotify_api_query_limit');
 
     // Retrieve a list of artists from the Spotify API.
     $artists = $api->search('artist', 'spotify', ['limit' => $artist_limit])->artists->items;

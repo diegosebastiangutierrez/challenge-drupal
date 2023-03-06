@@ -89,8 +89,8 @@ class SpotifyService {
    * @return array
    *  The response body with all songs or with errors.
    */
-  function getSongs() {
-    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/browse/new-releases?limit='. $this->getPlaylistId() .'/tracks', [
+  function getNewReleases() {
+    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/browse/new-releases?limit='. $this->getApiQueryLimit() .'&offset=' . $this->getApiQueryOffset() , [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
       ],
@@ -209,7 +209,7 @@ class SpotifyService {
    *
    */
   function getClientId() {
-    return $this->config_factory->get('client_id');
+    return $this->config_factory->get('spotify_client_id');
   }
 
   /**
@@ -217,7 +217,7 @@ class SpotifyService {
    *
    */
   function getClientSecret() {
-    return $this->config_factory->get('client_secret');
+    return $this->config_factory->get('spotify_client_secret');
   }
 
   /**
@@ -225,7 +225,7 @@ class SpotifyService {
    *
    */
   function getApiQueryLimit(){
-    return $this->config_factory->get('api_query_limit');
+    return $this->config_factory->get('spotify_api_query_limit');
   }
 
   /**
@@ -233,7 +233,7 @@ class SpotifyService {
    *
    */
   function getApiQueryOffset(){
-    return $this->config_factory->get('api_query_offset');
+    return $this->config_factory->get('spotify_api_query_offset');
   }
 
 }
