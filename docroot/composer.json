@@ -28,7 +28,8 @@
         "drupal/ctools": "^4.0",
         "drupal/custom_spotify_app": "dev-main",
         "drupal/pathauto": "^1.11",
-        "drupal/token": "^1.11"
+        "drupal/token": "^1.11",
+        "drush/drush": "^11.5"
     },
     "conflict": {
         "drupal/drupal": "*"
