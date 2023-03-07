@@ -65,6 +65,6 @@ function custom_spotify_app_install() {
     ->save();
 
   // Uninstall theme SEVEN that was admin theme.
-  \Drupal::service('theme_installer')->uninstall(['seven']);
+  //\Drupal::service('theme_installer')->uninstall(['seven']);
 
 }

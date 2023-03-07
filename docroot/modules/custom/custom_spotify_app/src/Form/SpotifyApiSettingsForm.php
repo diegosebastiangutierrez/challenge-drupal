@@ -207,8 +207,15 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
   public function crawl_new_info() {
 
     $config = $this->config('custom_spotify_app.settings');
+
+    //Here we save the albums ids so we get later the artists and songs
+    $albums_ids = array();
+
     //Here we save the artists ids so we get later the albums and songs
     $artists_ids = array();
+
+    //Here we save the tracks ids to get info later
+    $tracks_ids = array();
 
     // Retrieve the API credentials from the module settings.
     $client_id = \Drupal::config('custom_spotify_app.settings')->get('spotify_client_id');
@@ -229,12 +236,20 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     foreach ($albums->items as $album) {
 
+      $albums_ids[] = array(
+        'spotify_url' => $album->external_urls->spotify,
+        'id' => $album->id,
+        'name' => $album->name,
+        'images' => $album->images[0],
+        'tracks' => $api->getAlbumTracks($album->id)->items,
+      );
+
       foreach ($album->artists as $artist){
 
         $artists_ids[] = array(
           'name' => $artist->name,
           'id' => $artist->id,
-          'spotify_url' => $artist->external_url->spotify,
+          'spotify_url' => $artist->external_urls->spotify,
           'albums' => $api->getArtistAlbums($artist->id)->items,
         );
 
@@ -242,7 +257,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     }
 
-    print_r($artists_ids);die();
+    print_r($albums_ids);die();
+
 
     /*
     foreach ($albums->items as $album) {
