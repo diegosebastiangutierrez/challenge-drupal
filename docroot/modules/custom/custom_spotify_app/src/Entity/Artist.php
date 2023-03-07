@@ -47,13 +47,56 @@ class Artist extends ContentEntityBase implements ContentEntityInterface {
     public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
-    // Add fields for the Album entity.
-    $fields['title'] = BaseFieldDefinition::create('string')
+    // Add fields for the Artist entity.
+      $fields['artist_id'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('ID'))
+      ->setDescription(t('The ID of the Artist.'))
+      ->setRequired(TRUE)
+      ->setSetting('max_length', 50)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'string',
+        'weight' => -5,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -5,
+      ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+    $fields['artist_name'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('Name'))
+    ->setDescription(t('The name of the Artist.'))
+    ->setRequired(TRUE)
+    ->setSetting('max_length', 255)
+    ->setDisplayOptions('view', [
+      'label' => 'hidden',
+      'type' => 'string',
+      'weight' => -5,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'string_textfield',
+      'weight' => -5,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+      
+    $fields['artist_genres'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('Genres'))
+    ->setDescription(t(' genres.'))
+    ->setRequired(TRUE);
+    $fields['artist_popularity'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('popularity'))
+    ->setDescription(t(' popularity.'))
+    ->setRequired(TRUE);
+
+
+    $fields['artist_title'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Title'))
       ->setDescription(t('The Name of the Artist.'))
       ->setRequired(TRUE);
 
-    $fields['image'] = BaseFieldDefinition::create('image')
+    $fields['artist_image'] = BaseFieldDefinition::create('image')
       ->setLabel(t('Cover Image'))
       ->setDescription(t('The album cover image.'))
       ->setRequired(TRUE);
