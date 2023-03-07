@@ -241,7 +241,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
         'id' => $album->id,
         'name' => $album->name,
         'images' => $album->images[0],
-        'tracks' => $api->getAlbumTracks($album->id)->items,
+        //'tracks' => $api->getAlbumTracks($album->id)->items,
       );
 
       foreach ($album->artists as $artist){
@@ -250,15 +250,14 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
           'name' => $artist->name,
           'id' => $artist->id,
           'spotify_url' => $artist->external_urls->spotify,
-          'albums' => $api->getArtistAlbums($artist->id)->items,
+          //'albums' => $api->getArtistAlbums($artist->id)->items,
         );
 
       }
 
     }
 
-    print_r($albums_ids);die();
-
+    //print_r($artists_ids);die();
 
     /*
     foreach ($albums->items as $album) {

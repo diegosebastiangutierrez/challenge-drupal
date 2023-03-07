@@ -6,9 +6,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * Provides a controller for songs.
- */
 class CustomSpotifySongsController extends ControllerBase {
 
   /**
@@ -51,9 +48,9 @@ class CustomSpotifySongsController extends ControllerBase {
       '#rows' => [],
     ];
 
-    $album_storage = $this->entityTypeManager->getStorage('album');
+    $album_storage = $this->entityTypeManager->getStorage('song');
     $album_query = $album_storage->getQuery();
-    $album_query->sort('title');
+    $album_query->sort('name');
     $album_ids = $album_query->execute();
 
     foreach ($album_ids as $album_id) {

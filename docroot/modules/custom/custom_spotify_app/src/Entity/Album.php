@@ -31,25 +31,26 @@ class Album extends ContentEntityBase implements ContentEntityInterface{
     $fields = parent::baseFieldDefinitions($entity_type);
 
     // Add fields for the Album entity.
-      $fields['album_id'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the album.'))
-      ->setRequired(TRUE)
-      ->setSetting('max_length', 50)
-      ->setDisplayOptions('view', [
-        'label' => 'hidden',
-        'type' => 'string',
-        'weight' => -5,
-      ])
-      ->setDisplayOptions('form', [
-        'type' => 'string_textfield',
-        'weight' => -5,
-      ])
+    $fields['album_id'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('ID'))
+    ->setDescription(t('The ID of the album.'))
+    ->setRequired(TRUE)
+    ->setSetting('max_length', 50)
+    ->setDisplayOptions('view', [
+      'label' => 'hidden',
+      'type' => 'string',
+      'weight' => -5,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'string_textfield',
+      'weight' => -5,
+    ])
     ->setDisplayConfigurable('form', TRUE)
     ->setDisplayConfigurable('view', TRUE);
+
     $fields['album_artist'] = BaseFieldDefinition::create('string')
     ->setLabel(t('Name of artist '))
-    ->setDescription(t('The name artist of the album.'))
+    ->setDescription(t('The artist of the album.'))
     ->setRequired(TRUE)
     ->setSetting('max_length', 255)
     ->setDisplayOptions('view', [
@@ -63,27 +64,27 @@ class Album extends ContentEntityBase implements ContentEntityInterface{
     ])
     ->setDisplayConfigurable('form', TRUE)
     ->setDisplayConfigurable('view', TRUE);
-    
-    $fields['album_release_date'] = BaseFieldDefinition::create('datetime')
-  ->setLabel(t('Album Release Date'))
-  ->setDescription(t('The release date of the album.'))
-  ->setRequired(TRUE)
-  ->setDisplayOptions('view', [
-    'label' => 'above',
-    'type' => 'datetime_default',
-    'weight' => -3,
-  ])
-  ->setDisplayOptions('form', [
-    'type' => 'datetime_default',
-    'weight' => -3,
-  ])
-  ->setDisplayConfigurable('form', TRUE)
-  ->setDisplayConfigurable('view', TRUE);
 
-// Añadir ajustes adicionales para el campo de fecha
-$fields['album_release_date']->setSetting('datetime_type', 'date');
-$fields['album_release_date']->setSetting('date_format', 'Y-m-d');
-$fields['album_release_date']->setSetting('time_format', 'H:i:s');
+    $fields['album_release_date'] = BaseFieldDefinition::create('datetime')
+    ->setLabel(t('Album Release Date'))
+    ->setDescription(t('The release date of the album.'))
+    ->setRequired(TRUE)
+    ->setDisplayOptions('view', [
+      'label' => 'above',
+      'type' => 'datetime_default',
+      'weight' => -3,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'datetime_default',
+      'weight' => -3,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+
+    // Añadir ajustes adicionales para el campo de fecha
+    $fields['album_release_date']->setSetting('datetime_type', 'date');
+    $fields['album_release_date']->setSetting('date_format', 'Y-m-d');
+    $fields['album_release_date']->setSetting('time_format', 'H:i:s');
 
 
     $fields['album_title'] = BaseFieldDefinition::create('string')
@@ -110,6 +111,7 @@ $fields['album_release_date']->setSetting('time_format', 'H:i:s');
   }
 
   public function getSongs() {
+
     $songs = [];
 
     foreach ($this->get('field_album_songs')->referencedEntities() as $song) {

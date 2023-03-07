@@ -10,5 +10,6 @@ dependencies:
   - views
   - pathauto
   - admin_toolbar_tools
+  - options
 
 configure: custom_spotify_app.admin_settings

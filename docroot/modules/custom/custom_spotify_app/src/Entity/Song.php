@@ -44,26 +44,28 @@ use Drupal\Core\Entity\ContentEntityInterface;
  */
 class Song extends ContentEntityBase implements ContentEntityInterface {
 
-    public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+  public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+
     $fields = parent::baseFieldDefinitions($entity_type);
 
     // Add fields for the song entity.
-      $fields['song'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the song.'))
-      ->setRequired(TRUE)
-      ->setSetting('max_length', 50)
-      ->setDisplayOptions('view', [
-        'label' => 'hidden',
-        'type' => 'string',
-        'weight' => -5,
-      ])
-      ->setDisplayOptions('form', [
-        'type' => 'string_textfield',
-        'weight' => -5,
-      ])
+    $fields['song_id'] = BaseFieldDefinition::create('string')
+    ->setLabel(t('ID'))
+    ->setDescription(t('The ID of the song.'))
+    ->setRequired(TRUE)
+    ->setSetting('max_length', 50)
+    ->setDisplayOptions('view', [
+      'label' => 'hidden',
+      'type' => 'string',
+      'weight' => -5,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'string_textfield',
+      'weight' => -5,
+    ])
     ->setDisplayConfigurable('form', TRUE)
     ->setDisplayConfigurable('view', TRUE);
+
     $fields['name'] = BaseFieldDefinition::create('string')
     ->setLabel(t('Name'))
     ->setDescription(t('The name of the song.'))
@@ -80,29 +82,31 @@ class Song extends ContentEntityBase implements ContentEntityInterface {
     ])
     ->setDisplayConfigurable('form', TRUE)
     ->setDisplayConfigurable('view', TRUE);
+
     $fields['song_duration'] = BaseFieldDefinition::create('string')
     ->setLabel(t('Title'))
-    ->setDescription(t('The Name of the Song.'))
+    ->setDescription(t('The Duration of the Song.'))
     ->setRequired(TRUE);
+
     $fields['song_title'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Title'))
-      ->setDescription(t('The Name of the Song.'))
-      ->setRequired(TRUE);
+    ->setLabel(t('Title'))
+    ->setDescription(t('The Title of the Song.'))
+    ->setRequired(TRUE);
 
     $fields['song_album'] = BaseFieldDefinition::create('image')
-      ->setLabel(t('Cover Image'))
-      ->setDescription(t('The album cover image.'))
-      ->setRequired(TRUE);
+    ->setLabel(t('Cover Image'))
+    ->setDescription(t('The album cover image.'))
+    ->setRequired(TRUE);
 
     $fields['song_preview_url'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Spotify URL'))
-      ->setDescription(t('The URL of the song on Spotify.'))
-      ->setRequired(TRUE);
+    ->setLabel(t('Spotify URL'))
+    ->setDescription(t('The URL of the song on Spotify.'))
+    ->setRequired(TRUE);
 
     $fields['player_url'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Player URL'))
-      ->setDescription(t('The URL to embed the song player.'))
-      ->setRequired(TRUE);
+    ->setLabel(t('Player URL'))
+    ->setDescription(t('The URL to embed the song player.'))
+    ->setRequired(TRUE);
 
     return $fields;
   }
