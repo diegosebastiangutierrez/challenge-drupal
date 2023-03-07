@@ -97,7 +97,7 @@ class SpotifyService {
       'query' => [
         'limit' => $this->getApiQueryLimit(),
         'offset' => $this->getApiQueryOffset(),
-        'country' => 'AR'
+        'country' => 'AR',
       ],
     ]);
 

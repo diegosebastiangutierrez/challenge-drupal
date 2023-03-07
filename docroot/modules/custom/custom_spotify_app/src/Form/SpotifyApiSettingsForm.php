@@ -207,6 +207,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
   public function crawl_new_info() {
 
     $config = $this->config('custom_spotify_app.settings');
+    //Here we save the artists ids so we get later the albums and songs
+    $artists_ids = array();
 
     // Retrieve the API credentials from the module settings.
     $client_id = \Drupal::config('custom_spotify_app.settings')->get('spotify_client_id');
@@ -220,14 +222,30 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     $api->setAccessToken($session->getAccessToken());
 
-
-    // Retrieve a list of artists from the Spotify API.
+    // Retrieve a list of new releases from the Spotify API.
     $contents = $api->getNewReleases();
 
-    // var_export($contents);die();
+    $albums = $contents->albums;
 
-    //Loop through each item
-    foreach ($contents as $song) {
+    foreach ($albums->items as $album) {
+
+      foreach ($album->artists as $artist){
+
+        $artists_ids[] = array(
+          'name' => $artist->name,
+          'id' => $artist->id,
+          'spotify_url' => $artist->external_url->spotify,
+          'albums' => $api->getArtistAlbums($artist->id)->items,
+        );
+
+      }
+
+    }
+
+    print_r($artists_ids);die();
+
+    /*
+    foreach ($albums->items as $album) {
 
       $node = \Drupal::entityTypeManager()->getStorage('node')->create([
         'type' => 'artist',
@@ -239,11 +257,9 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       $node->set('field_artist_popularity', $artist->popularity);
       $node->save();
 
-      // Retrieve the albums for the current artist.
-      $albums = $api->getArtistAlbums($artist->id)->items;
-
       // Loop through each album and create an "Album" node.
       foreach ($albums as $album) {
+
 
         $album_node = \Drupal::entityTypeManager()->getStorage('node')->create([
           'type' => 'album',
@@ -257,10 +273,13 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
 
         // Retrieve the tracks for the current album.
-        $albumTracks = $this->api->getAlbumTracks($album['id']);
+        $albumTracks = $api->getAlbumTracks($album->id);
+
+        //print_r($albumTracks);
 
         // Loop through the tracks and create a Song node for each one.
-        foreach ($albumTracks['items'] as $song) {
+
+        foreach ($albumTracks as $song) {
           $song_node = $this->nodeStorage->create([
             'type' => 'song',
             'title' => $song['name'],
@@ -274,5 +293,6 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
         }
       }
     }
+    */
   }
 }
