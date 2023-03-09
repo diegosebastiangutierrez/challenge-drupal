@@ -6,8 +6,16 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+
+use Drupal\taxonomy\Entity\Term;
+
+use Drupal\custom_spotify_entities\Entity\Artist;
+use Drupal\custom_spotify_entities\Entity\Album;
+use Drupal\custom_spotify_entities\Entity\Song;
+
 use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
+
 
 /**
  * Class SpotifyApiSettingsForm.
@@ -129,7 +137,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#description' => $this->t('Your Spotify API Query Limit.'),
       '#default_value' => $config->get('spotify_api_query_limit'),
       '#min' => 0,
-      '#max' => 20,
+      '#max' => 50,
       '#required' => FALSE,
     ];
 
@@ -139,6 +147,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       '#title' => $this->t('API Query Offset'),
       '#description' => $this->t('Your Spotify API Query Offset.'),
       '#default_value' => $config->get('spotify_api_query_offset'),
+      '#min' => 0,
+      '#max' => 50,
       '#required' => FALSE,
     ];
 
@@ -231,78 +241,180 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     // Retrieve a list of new releases from the Spotify API.
     $contents = $api->getNewReleases();
-
+    //Obtengo lista de Albums
     $albums = $contents->albums;
 
+    //Armo dos arrays, uno para albums y otro con los
+    //artistas de los albums, para primero generar los artistas
+    //los géneros, luego los albums
     foreach ($albums->items as $album) {
 
-      $albums_ids[] = [
-        'spotify_url' => $album->external_urls->spotify,
-        'id' => $album->id,
-        'name' => $album->name,
-        'images' => $album->images[0],
-        //'tracks' => $api->getAlbumTracks($album->id)->items,
-      ];
+      if($album->album_type != 'null'){
 
-      foreach ($album->artists as $artist){
-
-        $artists_ids[] = [
-          'name' => $artist->name,
-          'id' => $artist->id,
-          'spotify_url' => $artist->external_urls->spotify,
-          //'albums' => $api->getArtistAlbums($artist->id)->items,
+        $albums_ids[] = [
+          'title' => $album->name,
+          'spotify_id' => $album->id,
+          'spotify_detail_url' => $album->external_urls->spotify,
+          'cover_image' => $album->images[0],
+          'release_date' => $album->release_date,
         ];
 
+        foreach ($album->artists as $artist){
+          if(!in_array($artist, $artists_ids)){
+            $artists_ids[] = [
+              'name' => $artist->name,
+              'spotify_id' => $artist->id,
+              'spotify_detail_url' => $artist->external_urls->spotify,
+            ];
+          }
+        }
+        $album->artist = $artists_ids;
       }
-
     }
 
-    //print_r($artists_ids);die();
-
+    //Guardo en BD los artistas
     foreach ($artists_ids as $artist) {
 
-      $node = \Drupal::entityTypeManager()->getStorage('node')->create([
-        'type' => 'artist',
-        'title' => $artist->name,
-      ]);
-      $node->set('field_artist_id', $artist->id);
-      $node->set('field_artist_image', $artist->images[0]->url);
-      $node->set('field_artist_genres', $artist->genres);
-      $node->set('field_artist_popularity', $artist->popularity);
-      $node->save();
+      //Check if artist exists
+      $aid = $this->checkArtist($artist['spotify_id']);
+      //si no existe en bd, continúo
+      if(!$aid) continue;
 
-      // Loop through each album and create an "Album" node.
-      foreach ($albums_ids as $album) {
+      $artist_node = $api->getArtist($artist['spotify_id']);
+      $artist_genres = array();
 
-        $album_node = \Drupal::entityTypeManager()->getStorage('node')->create([
-          'type' => 'album',
-          'title' => $album->name,
-        ]);
-        $album_node->set('field_album_id', $album->id);
-        $album_node->set('field_album_artist', $node->id());
-        $album_node->set('field_album_image', $album->images[0]->url);
-        $album_node->set('field_album_release_date', $album->release_date);
-        $album_node->save();
-
-        // Retrieve the tracks for the current album.
-        $albumTracks = $api->getAlbumTracks($album->id);
-
-        // Loop through the tracks and create a Song node for each one.
-
-        foreach ($albumTracks as $song) {
-          $song_node = $this->nodeStorage->create([
-            'type' => 'song',
-            'title' => $song['name'],
-            'field_song_duration' => $song['duration_ms'],
-            'field_song_preview_url' => $song['preview_url'],
-            'field_song_album' => $album_node,
-          ]);
-
-          // Save the Song node.
-          $song_node->save();
-        }
+      foreach($artist_node->genres as $genre){
+        $artist_genres[] = $this->checkGenreAndGenerate($genre);
       }
+
+      $new_artist = Artist::create([
+        'type' => 'artist',
+        'name' => $artist['name'],
+        'spotify_id' => $artist['spotify_id'],
+        'spotify_detail_url' => $artist['spotify_detail_url'],
+        'genre' => $artist_genres,
+        'popularity' => $artist_node->popularity,
+        'followers' => $artist_node->followers->total,
+        'cover_image' => [
+          'uri' => $artist_node->images[0]->url,
+          'width' => $artist_node->images[0]->width,
+          'height' => $artist_node->images[0]->height,
+          'alt' => $artist['name'],
+          'title' => $artist['name']
+        ],
+      ]);
+
+      $new_artist->save();
     }
 
+    //Genero los albums
+    foreach ($albums_ids as $album){
+      //Check if album exists
+      $aid = $this->checkAlbum($album['spotify_id']);
+      if(!$aid) continue;
+
+      $album_node = $api->getAlbum($album['spotify_id']);
+      $album_genres = array();
+
+      foreach($album_node->genres as $genre){
+        $album_genres[] = $this->checkGenreAndGenerate($genre);
+      }
+
+      //Check if artist exists
+      $aid = $this->checkArtist($artist['spotify_id']);
+      if($aid) continue;
+
+      $new_album = Album::create([
+        'type' => 'album',
+        'name' => $album['title'],
+        'spotify_id' => $album['spotify_id'],
+        'spotify_detail_url' => $album['spotify_detail_url'],
+        'genre' => $album_genres,
+        'artist' => $aid,
+        'popularity' => $album_node->popularity,
+        'release_date' => $album_node->release_date,
+        'cover_image' => [
+          'uri' => $album_node->images[0]->url,
+          'width' => $album_node->images[0]->width,
+          'height' => $album_node->images[0]->height,
+          'alt' => $album['title'],
+          'title' => $album['title']
+        ],
+      ]);
+
+      $new_album->save();
+
+      //Chequeo si existen los tracks
+      $album_tracks = $api->getAlbumTracks($album['spotify_id']);
+
+      foreach($album_tracks as $track){
+
+        $aid = $this->checkSong($track->id);
+        if(!aid) continue;
+
+        $track_genres = array();
+        $track_artists = array();
+
+        foreach($track->artists as $artist){
+          $track_artists[] = $artist->id;
+        }
+
+        $new_track = Song::create([
+          'type' => 'song',
+          'title' => $track->title,
+          'spotify_id' => $track->id,
+          'spotify_detail_url' => $track->external_urls->spotify,
+          'artist' => $track_artists,
+        ]);
+
+        $new_track->save();
+
+      }
+
+    }
+
+  }
+
+  public function checkArtist($id){
+      //Check if artist exists
+      $query = \Drupal::entityQuery('artist');
+      $query->condition('spotify_id', $id);
+      $aid = $query->execute();
+      return $aid;
+  }
+
+  public function checkAlbum($id){
+      //Check if artist exists
+      $query = \Drupal::entityQuery('album');
+      $query->condition('spotify_id', $id);
+      $aid = $query->execute();
+      return $aid;
+  }
+
+  public function checkSong($id){
+      //Check if artist exists
+      $query = \Drupal::entityQuery('song');
+      $query->condition('spotify_id', $id);
+      $aid = $query->execute();
+      return $aid;
+  }
+
+  public function checkGenreAndGenerate($genre){
+    //Check if genre exists
+    $query = \Drupal::entityQuery('taxonomy_term');
+    $query->condition('vid', "genres");
+    $query->condition('name', $genre);
+    $tids = $query->execute();
+
+    if($tids) return $tids;
+    else{
+      $term = \Drupal\taxonomy\Entity\Term::create([
+        'vid' => 'genres',
+        'name' => $genre,
+      ]);
+      $term->enforceIsNew();
+      $term->save();
+      return $term;
+    }
   }
 }
