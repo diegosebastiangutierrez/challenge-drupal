@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - custom_spotify_app
+name: Genres
+vid: genres
+description: 'Stores the genres for custom_spotify_app module related entities'
+hierarchy: 0
+weight: 0
