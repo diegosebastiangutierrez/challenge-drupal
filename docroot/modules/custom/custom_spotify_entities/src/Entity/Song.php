@@ -183,6 +183,22 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['popularity'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Popularity'))
+      ->setDescription(t('Song Popularity.'))
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'integer',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     $fields['description'] = BaseFieldDefinition::create('text_long')
       ->setTranslatable(TRUE)
       ->setLabel(t('Description'))
