@@ -112,7 +112,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'string',
         'weight' => -5,
       ])
@@ -130,7 +130,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'link_default',
         'weight' => -5,
       ])
@@ -188,7 +188,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setSetting('target_type', 'artist')
       ->setSetting('handler', 'default')
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'entity_reference_label',
         'weight' => 0,
       ])

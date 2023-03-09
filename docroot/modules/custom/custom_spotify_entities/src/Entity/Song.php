@@ -111,7 +111,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'string',
         'weight' => -5,
       ])
@@ -129,7 +129,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'link_default',
         'weight' => -5,
       ])
@@ -142,7 +142,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setSetting('target_type', 'artist')
       ->setSetting('handler', 'default')
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'entity_reference_label',
         'weight' => 0,
       ])
@@ -166,7 +166,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setSetting('target_type', 'album')
       ->setSetting('handler', 'default')
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'entity_reference_label',
         'weight' => 0,
       ])

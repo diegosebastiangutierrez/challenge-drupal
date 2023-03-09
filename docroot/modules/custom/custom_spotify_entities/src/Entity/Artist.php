@@ -49,7 +49,7 @@ use Drupal\link\LinkItemInterface;
  *     "label" = "name",
  *     "uuid" = "uuid",
  *     "owner" = "uid",
- *     "artist_id" = "artist_id",
+ *     "spotify_ip" = "spotify_id",
  *   },
  *   links = {
  *     "collection" = "/admin/content/artist",
@@ -112,7 +112,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'string',
         'weight' => -5,
       ])
@@ -130,7 +130,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'link_default',
         'weight' => -5,
       ])
@@ -146,7 +146,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'hidden',
+        'label' => 'above',
         'type' => 'integer',
         'weight' => -5,
       ])
