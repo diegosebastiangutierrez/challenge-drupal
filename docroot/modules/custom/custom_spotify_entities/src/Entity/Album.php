@@ -165,19 +165,20 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['description'] = BaseFieldDefinition::create('text_long')
-      ->setTranslatable(TRUE)
-      ->setLabel(t('Description'))
+    $fields['popularity'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Popularity'))
+      ->setDescription(t('Song Popularity.'))
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'above',
+        'type' => 'integer',
+        'weight' => 0,
+      ])
       ->setDisplayOptions('form', [
-        'type' => 'text_textarea',
-        'weight' => 10,
+        'type' => 'number',
+        'weight' => 0,
       ])
       ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayOptions('view', [
-        'type' => 'text_default',
-        'label' => 'above',
-        'weight' => 10,
-      ])
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['artist'] = BaseFieldDefinition::create('entity_reference')
