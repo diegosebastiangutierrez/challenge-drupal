@@ -1,0 +1,10 @@
+name: Custom Spotify Entities
+type: module
+description: 'Spotify App Entities created here'
+core_version_requirement: ^8 || ^9
+package: Custom
+
+dependencies:
+  - remote_image
+  - custom_spotify_app
+  - pathauto

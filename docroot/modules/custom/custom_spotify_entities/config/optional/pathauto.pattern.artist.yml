@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_spotify_entities
+id: artist
+label: 'Artist URL'
+type: 'canonical_entities:artist'
+pattern: 'artist/[artist:name]'
+selection_criteria: {  }
+selection_logic: and
+weight: -5
+relationships:
+  'artist:langcode:language':
+    label: Language

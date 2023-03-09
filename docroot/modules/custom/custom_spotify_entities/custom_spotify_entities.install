@@ -1,0 +1,17 @@
+<?php
+
+namespace Drupal\custom_spotify_entities;
+
+use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\Core\StringTranslation\StringTranslationTrait;
+
+/**
+ * Implements hook_install().
+ */
+function custom_spotify_entities_install() {
+
+  // Enable the pathauto module.
+
+  \Drupal::service('module_installer')->install(['pathauto']);
+
+}

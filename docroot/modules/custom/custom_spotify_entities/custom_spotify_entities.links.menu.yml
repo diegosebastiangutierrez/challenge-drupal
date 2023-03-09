@@ -1,0 +1,58 @@
+entity.artist.settings:
+  title: 'Artist'
+  description: 'Configure an Artist entity type.'
+  route_name:  entity.artist.settings
+  parent: system.admin_structure
+entity.artist.collection:
+  title: 'Artists'
+  description: 'List of artists.'
+  route_name: entity.artist.collection
+  parent: system.admin_content
+
+entity.album.settings:
+  title: 'Album'
+  description: 'Configure an Album entity type.'
+  route_name:  entity.album.settings
+  parent: system.admin_structure
+entity.album.collection:
+  title: 'Albums'
+  description: 'List of albums.'
+  route_name: entity.album.collection
+  parent: system.admin_content
+
+entity.song.settings:
+  title: 'Song'
+  description: 'Configure a Song entity type.'
+  route_name:  entity.song.settings
+  parent: system.admin_structure
+entity.song.collection:
+  title: 'Songs'
+  description: 'List of songs.'
+  route_name: entity.song.collection
+  parent: system.admin_content
+
+
+
+custom_spotify_entities.artists:
+  title: 'Artists'
+  parent: main
+  menu_name: main
+  enabled: 1
+  weight: 50
+  route_name: custom_spotify_entities.artists
+
+custom_spotify_entities.albums:
+  title: 'Albums'
+  parent: main
+  menu_name: main
+  enabled: 1
+  weight: 60
+  route_name: custom_spotify_entities.albums
+
+custom_spotify_entities.songs:
+  title: 'Songs'
+  parent: main
+  menu_name: main
+  enabled: 1
+  weight: 70
+  route_name: custom_spotify_entities.songs

@@ -1,0 +1,122 @@
+<?php
+
+/**
+ * @file
+ * Provides an artist entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\custom_spotify_entities\Entity\Artist;
+use Drupal\custom_spotify_entities\Entity\Album;
+use Drupal\custom_spotify_entities\Entity\Song;
+use Drupal\user\UserInterface;
+
+
+/**
+ * Prepares variables for artist templates.
+ *
+ * Default template: artist.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the artist information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_artist(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+function template_preprocess_album(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+function template_preprocess_song(array &$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function custom_spotify_entities_user_cancel($edit, UserInterface $account, $method) {
+
+  $entities = ['artist', 'album', 'song'];
+
+  foreach($entities as $entity) {
+    switch ($method) {
+      case 'user_cancel_block_unpublish':
+        // Unpublish artists.
+        $storage = \Drupal::entityTypeManager()->getStorage($entity);
+        $ent_ids = $storage->getQuery()
+          ->condition('uid', $account->id())
+          ->condition('status', 1)
+          ->execute();
+        foreach ($storage->loadMultiple($ent_ids) as $ent) {
+          $ent->set('status', FALSE);
+          $ent->save();
+        }
+        break;
+
+      case 'user_cancel_reassign':
+        // Anonymize artists.
+        $storage = \Drupal::entityTypeManager()->getStorage($entity);
+        $ent_ids = $storage->getQuery()
+          ->condition('uid', $account->id())
+          ->execute();
+        foreach ($storage->loadMultiple($ent_ids) as $ent) {
+          $ent->setOwnerId(0);
+          $ent->save();
+        }
+        break;
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function custom_spotify_entities_user_predelete(UserInterface $account) {
+  // Delete artists.
+  $storage = \Drupal::entityTypeManager()->getStorage('artist');
+  $artist_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $artists = $storage->loadMultiple($artist_ids);
+  $storage->delete($artists);
+
+  // Delete albums.
+  $storage = \Drupal::entityTypeManager()->getStorage('album');
+  $album_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $albums = $storage->loadMultiple($album_ids);
+  $storage->delete($albums);
+
+  // Delete songs.
+  $storage = \Drupal::entityTypeManager()->getStorage('song');
+  $song_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->execute();
+  $songs = $storage->loadMultiple($song_ids);
+  $storage->delete($songs);
+}
+
+/**
+ * Implements hook_theme().
+ */
+function custom_spotify_entities_theme() {
+  return [
+    'song' => [
+      'render element' => 'elements',
+    ],
+  ];
+}

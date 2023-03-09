@@ -1,0 +1,32 @@
+entity.artist.edit_form:
+  route_name: entity.artist.edit_form
+  group: artist
+  title: Edit
+
+entity.artist.delete_form:
+  route_name: entity.artist.delete_form
+  group: artist
+  title: Delete
+  weight: 10
+
+entity.album.edit_form:
+  route_name: entity.album.edit_form
+  group: album
+  title: Edit
+
+entity.album.delete_form:
+  route_name: entity.album.delete_form
+  group: album
+  title: Delete
+  weight: 10
+
+entity.song.edit_form:
+  route_name: entity.song.edit_form
+  group: song
+  title: Edit
+
+entity.song.delete_form:
+  route_name: entity.song.delete_form
+  group: song
+  title: Delete
+  weight: 10

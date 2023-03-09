@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_spotify_entities
+id: song
+label: 'Song URL'
+type: 'canonical_entities:song'
+pattern: 'song/[song:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: -5
+relationships:
+  'song:langcode:language':
+    label: Language

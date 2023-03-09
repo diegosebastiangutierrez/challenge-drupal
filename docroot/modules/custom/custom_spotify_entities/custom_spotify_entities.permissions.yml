@@ -1,0 +1,35 @@
+administer artist:
+  title: 'Administer artist settings'
+  restrict access: true
+delete artist:
+  title: Delete artist
+create artist:
+  title: Create artist
+view artist:
+  title: View artist
+edit artist:
+  title: Edit artist
+
+administer album:
+  title: 'Administer album settings'
+  restrict access: true
+delete album:
+  title: Delete album
+create album:
+  title: Create album
+view album:
+  title: View album
+edit album:
+  title: Edit album
+
+administer song:
+  title: 'Administer song settings'
+  restrict access: true
+delete song:
+  title: Delete song
+create song:
+  title: Create song
+view song:
+  title: View song
+edit song:
+  title: Edit song

@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_spotify_entities
+id: album
+label: 'Album URL'
+type: 'canonical_entities:album'
+pattern: 'album/[album:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: -5
+relationships:
+  'album:langcode:language':
+    label: Language
