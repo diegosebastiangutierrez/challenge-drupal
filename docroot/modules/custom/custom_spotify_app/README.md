@@ -1,6 +1,6 @@
 # Custom Spotify App
-
 Custom Spotify App is a Drupal 9 module that integrates with the Spotify API to display artist information. Once installed, the module provides a page at `/artists` that displays a list of artists fetched from the Spotify API.
+
 
 ## Installation
 
