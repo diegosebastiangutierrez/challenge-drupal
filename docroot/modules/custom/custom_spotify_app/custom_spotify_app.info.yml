@@ -8,7 +8,6 @@ dependencies:
   - block
   - config
   - views
-  - pathauto
   - admin_toolbar_tools
   - options
 

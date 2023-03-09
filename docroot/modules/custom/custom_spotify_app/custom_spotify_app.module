@@ -1,6 +1,5 @@
 <?php
 
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -14,57 +13,4 @@ function custom_spotify_app_help($route_name, RouteMatchInterface $route_match) 
       return '<p>' . t('This module integrates with the Spotify API to display artist information on a custom block and a page.') . '</p>';
       break;
   }
-}
-
-/**
- * Implements hook_entity_bundle_create().
- */
-function custom_spotify_app_entity_bundle_create(EntityTypeInterface $entity_type, $bundle_name, array $bundle) {
-  // Set the automatic slug for artists.
-  if ($entity_type->id() === 'node' && $bundle_name === 'artist') {
-    $field_definition = $entity_type->getFieldDefinitions()['_title'];
-    $field_definition->setSetting('generate_auto_label', TRUE);
-    $field_definition->setSetting('auto_label_type', 'auto');
-    $field_definition->save();
-  }
-  // Set the automatic slug for albums.
-  if ($entity_type->id() === 'node' && $bundle_name === 'album') {
-    $field_definition = $entity_type->getFieldDefinitions()['_title'];
-    $field_definition->setSetting('generate_auto_label', TRUE);
-    $field_definition->setSetting('auto_label_type', 'auto');
-    $field_definition->save();
-  }
-  // Set the automatic slug for songs.
-  if ($entity_type->id() === 'node' && $bundle_name === 'song') {
-    $field_definition = $entity_type->getFieldDefinitions()['_title'];
-    $field_definition->setSetting('generate_auto_label', TRUE);
-    $field_definition->setSetting('auto_label_type', 'auto');
-    $field_definition->save();
-  }
-}
-
-/**
- * Implements hook_install
- */
-function custom_spotify_app_install() {
-
-  $theme_list = [
-    'olivero',
-    'claro',
-  ];
-
-  // Install themes.
-  \Drupal::service('theme_installer')->install($theme_list);
-  // Get system theme editable configs.
-  $system_theme = \Drupal::configFactory()->getEditable('system.theme');
-
-  // Set default theme OLIVERO and admin theme CLARO.
-  $system_theme
-    ->set('default', $theme_list[0])
-    ->set('admin', $theme_list[1])
-    ->save();
-
-  // Uninstall theme SEVEN that was admin theme.
-  //\Drupal::service('theme_installer')->uninstall(['seven']);
-
 }

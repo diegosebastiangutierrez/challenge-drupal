@@ -1,35 +1,3 @@
-custom_spotify_app.artists:
-  path: '/artists'
-  defaults:
-    _title: 'Artists'
-    _controller: '\Drupal\custom_spotify_app\Controller\CustomSpotifyArtistsController::list'
-  requirements:
-    _permission: 'access content'
-
-custom_spotify_app.artist_detail:
-  path: '/artists/{id}'
-  defaults:
-    _title: 'Artist Detail'
-    _controller: '\Drupal\custom_spotify_app\Controller\CustomSpotifyArtistsController::detail'
-  requirements:
-    _permission: 'access content'
-
-custom_spotify_app.songs:
-  path: '/songs'
-  defaults:
-    _controller: '\Drupal\custom_spotify_app\Controller\CustomSpotifySongsController::list'
-    _title: 'Songs'
-  requirements:
-    _permission: 'access content'
-
-custom_spotify_app.albums:
-  path: '/albums'
-  defaults:
-    _controller: '\Drupal\custom_spotify_app\Controller\CustomSpotifyAlbumsController::list'
-    _title: 'Albums'
-  requirements:
-    _permission: 'access content'
-
 custom_spotify_app.admin_settings:
   path: '/admin/config/services/custom-spotify-app'
   parent: system.admin_config_services

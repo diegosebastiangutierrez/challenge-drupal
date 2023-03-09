@@ -161,7 +161,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     $form['actions']['import'] = [
       '#type' => 'submit',
       '#value' => $this->t('Import New Content'),
-      '#submit' => array('::crawl_new_info'),
+      '#submit' => ['::submitForm','::crawl_new_info'],
       '#weight' => 10,
     ];
 
@@ -185,7 +185,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       ->set('spotify_api_query_offset', $form_state->getValue('spotify_api_query_offset'))
       ->set('caching_time', $form_state->getValue('caching_time'))
       ->save();
-    parent::submitForm($form, $form_state);
+
+      parent::submitForm($form, $form_state);
   }
 
 
@@ -194,7 +195,6 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     if (!$form_state->getValue('spotify_access_token')) {
       $service = \Drupal::service('custom_spotify_app.api_service')->auth();
-
       $form_state->setValue('spotify_access_token', $service->access_token);
       $form_state->setRebuild();
 
@@ -209,13 +209,13 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     $config = $this->config('custom_spotify_app.settings');
 
     //Here we save the albums ids so we get later the artists and songs
-    $albums_ids = array();
+    $albums_ids = [];
 
     //Here we save the artists ids so we get later the albums and songs
-    $artists_ids = array();
+    $artists_ids = [];
 
     //Here we save the tracks ids to get info later
-    $tracks_ids = array();
+    $tracks_ids = [];
 
     // Retrieve the API credentials from the module settings.
     $client_id = \Drupal::config('custom_spotify_app.settings')->get('spotify_client_id');
@@ -236,22 +236,22 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     foreach ($albums->items as $album) {
 
-      $albums_ids[] = array(
+      $albums_ids[] = [
         'spotify_url' => $album->external_urls->spotify,
         'id' => $album->id,
         'name' => $album->name,
         'images' => $album->images[0],
         //'tracks' => $api->getAlbumTracks($album->id)->items,
-      );
+      ];
 
       foreach ($album->artists as $artist){
 
-        $artists_ids[] = array(
+        $artists_ids[] = [
           'name' => $artist->name,
           'id' => $artist->id,
           'spotify_url' => $artist->external_urls->spotify,
           //'albums' => $api->getArtistAlbums($artist->id)->items,
-        );
+        ];
 
       }
 
@@ -259,8 +259,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
     //print_r($artists_ids);die();
 
-    /*
-    foreach ($albums->items as $album) {
+    foreach ($artists_ids as $artist) {
 
       $node = \Drupal::entityTypeManager()->getStorage('node')->create([
         'type' => 'artist',
@@ -273,8 +272,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       $node->save();
 
       // Loop through each album and create an "Album" node.
-      foreach ($albums as $album) {
-
+      foreach ($albums_ids as $album) {
 
         $album_node = \Drupal::entityTypeManager()->getStorage('node')->create([
           'type' => 'album',
@@ -286,11 +284,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
         $album_node->set('field_album_release_date', $album->release_date);
         $album_node->save();
 
-
         // Retrieve the tracks for the current album.
         $albumTracks = $api->getAlbumTracks($album->id);
-
-        //print_r($albumTracks);
 
         // Loop through the tracks and create a Song node for each one.
 
@@ -308,6 +303,6 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
         }
       }
     }
-    */
+
   }
 }
