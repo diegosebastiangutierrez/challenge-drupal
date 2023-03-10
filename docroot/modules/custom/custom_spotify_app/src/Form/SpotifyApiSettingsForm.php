@@ -8,7 +8,6 @@ use Drupal\Core\Config\ConfigFactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Drupal\taxonomy\Entity\Term;
-use Drupal\taxonomy\Entity\Vocabulary;
 
 use Drupal\custom_spotify_entities\Entity\Artist;
 use Drupal\custom_spotify_entities\Entity\Album;
@@ -18,7 +17,6 @@ use SpotifyWebAPI\Session;
 use SpotifyWebAPI\SpotifyWebAPI;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 
 
 /**
@@ -244,24 +242,23 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       $album_artists = array();
 
       //Check if album exists, if not, create it
-      error_log("Album Exists?: " . $album->id);
-      error_log($this->checkAlbum($album->id));
-
       if(!$this->checkAlbum($album->id)){
+
+        error_log("Album not Exists: " . $album->id);
 
         $album_node = $api->getAlbum($album->id);
         //Saving genres to add to the node
         $album_genres = array();
 
         foreach($album_node->genres as $genre){
-          $album_genres[] = array('target_id' => $this->checkGenreAndGenerate($genre));
+          $album_genres[] = array('target_id' => $this->checkGenreAndGenerate($genre),);
         }
 
         foreach($album_node->artists as $artist){
           if($aid = $this->checkArtist($artist->id)) $album_artists[] = $aid;
           else{
             //Create Artist from API Call
-            $album_artists[] = array('target_id' => $this->createArtist($artist->id, $api));
+            $album_artists[] = array('target_id' => $this->createArtist($artist->id, $api),);
           }
         }
 
@@ -293,7 +290,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
             if($aid = $this->checkArtist($artist->id)) $track_artists[] = $aid;
             else{
               //Create Artist from API Call
-              $track_artists[] = array('target_id' => $this->createArtist($artist->id, $api));
+              $track_artists[] = array('target_id' => $this->createArtist($artist->id, $api),);
             }
           }
 
@@ -314,13 +311,13 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     }
   }
 
-  public function createAlbum($albumId, SpotifyWebAPI &$api){
+  public function createAlbum($albumId, $api){
 
     $artist_node = $api->getAlbum($albumId);
     $artist_genres = array();
 
     foreach($artist_node->genres as $genre){
-      $artist_genres[] = array('target_id' => $this->checkGenreAndGenerate($genre));
+      $artist_genres[] = array('target_id' => $this->checkGenreAndGenerate($genre),);
     }
 
     // Create the artist entity.
@@ -349,7 +346,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     $artist_genres = array();
 
     foreach($artist_node->genres as $genre){
-      $artist_genres[] = array('target_id' => $this->checkGenreAndGenerate($genre));
+      $artist_genres[] = array('target_id' => $this->checkGenreAndGenerate($genre),);
     }
 
     // Create the artist entity.
@@ -369,29 +366,32 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       ],
     ]);
     $artist_entity->save();
-    return $this->checkArtist($artist_node->id);
+    return $this->checkArtist($artist_entity->id);
   }
 
   public function checkArtist($id){
     // Check if the artist entity already exists.
-    $artist_entity = \Drupal::entityTypeManager()->getStorage('artist')->load($id);
+    $artist_entity = \Drupal::entityTypeManager()->getStorage('artist')
+    ->loadByProperties(['spotify_id' => $id]);
     if (!$artist_entity) return FALSE;
-    return $artist_entity;
+    return $artist_entity->id();
 
   }
 
   public function checkAlbum($id){
     // Check if the artist entity already exists.
-    $album_entity = \Drupal::entityTypeManager()->getStorage('album')->load($id);
+    $album_entity = \Drupal::entityTypeManager()->getStorage('album')
+    ->loadByProperties(['spotify_id' => $id]);
     if (!$album_entity) return FALSE;
-    return $album_entity;
+    return $album_entity->id();
   }
 
   public function checkSong($id){
     // Check if the artist entity already exists.
-    $song_entity = \Drupal::entityTypeManager()->getStorage('artist')->load($id);
+    $song_entity = \Drupal::entityTypeManager()->getStorage('song')
+    ->loadByProperties(['spotify_id' => $id,]);
     if (!$song_entity) return FALSE;
-    return $song_entity;
+    return $song_entity->id();
   }
 
   public function checkGenreAndGenerate($genre_name){
@@ -408,7 +408,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       $genre_term->save();
       $genre_term = reset($genre_term);
     }
-    return $genre_term->id;
+    return $this->checkGenreAndGenerate($genre_name);
 
   }
 }
