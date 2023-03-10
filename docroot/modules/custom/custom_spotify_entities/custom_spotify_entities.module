@@ -118,5 +118,10 @@ function custom_spotify_entities_theme() {
     'song' => [
       'render element' => 'elements',
     ],
+    'field__preview_url' => [
+      'base hook' => 'field',
+      'template' => 'field--preview-url',
+      'render element' => 'elements',
+    ],
   ];
 }

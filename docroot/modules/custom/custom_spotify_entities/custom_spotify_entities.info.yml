@@ -4,7 +4,9 @@ description: 'Spotify App Entities created here'
 core_version_requirement: ^8 || ^9
 package: Custom
 
+version: '1.0.0'
+
 dependencies:
   - remote_image
-  - custom_spotify_app
   - pathauto
+  - semanticviews

@@ -88,6 +88,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setTranslatable(TRUE)
       ->setLabel(t('Title'))
       ->setRequired(TRUE)
+      ->addConstraint('UniqueField')
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
@@ -105,6 +106,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setTranslatable(false)
       ->setLabel(t('ID Of the entity on Spotify'))
       ->setRequired(TRUE)
+      ->addConstraint('UniqueField')
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
@@ -112,7 +114,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'string',
         'weight' => -5,
       ])
@@ -130,7 +132,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'link_default',
         'weight' => -5,
       ])
@@ -170,7 +172,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setDescription(t('Song Popularity.'))
       ->setDefaultValue(0)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'integer',
         'weight' => 0,
       ])
@@ -251,7 +253,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'author',
         'weight' => 15,
       ])
@@ -262,7 +264,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setTranslatable(TRUE)
       ->setDescription(t('The time that the album was created.'))
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'timestamp',
         'weight' => 20,
       ])
@@ -292,7 +294,7 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'type' => 'boolean',
-        'label' => 'above',
+        'label' => 'inline',
         'weight' => 0,
         'settings' => [
           'format' => 'enabled-disabled',

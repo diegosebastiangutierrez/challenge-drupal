@@ -282,10 +282,22 @@ class SpotifyService {
   }
 
   /**
-   * Get the current api query limit.
+   * Get the current api query offset.
    *
    */
   function getApiQueryOffset() {
     return $this->config_factory->get('spotify_api_query_offset');
   }
+
+    /**
+   * Set new api query offset config value.
+   *
+   * @return bool
+   *  The result of the config save.
+   */
+  function setApiQueryOffset() {
+    $new_offset = $this->config_factory->get('spotify_api_query_offset') + $this->config_factory->get('spotify_api_query_limit');
+    return $this->config_factory->set('spotify_api_query_offset', $new_offset)->save();
+  }
+
 }

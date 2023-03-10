@@ -49,7 +49,6 @@ use Drupal\link\LinkItemInterface;
  *     "label" = "name",
  *     "uuid" = "uuid",
  *     "owner" = "uid",
- *     "spotify_ip" = "spotify_id",
  *   },
  *   links = {
  *     "collection" = "/admin/content/artist",
@@ -88,6 +87,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ->setTranslatable(TRUE)
       ->setLabel(t('Name'))
       ->setRequired(TRUE)
+      ->addConstraint('UniqueField')
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
@@ -105,6 +105,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ->setTranslatable(false)
       ->setLabel(t('ID Of the entity on Spotify'))
       ->setRequired(TRUE)
+      ->addConstraint('UniqueField')
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
@@ -146,7 +147,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'integer',
         'weight' => -5,
       ])
@@ -214,7 +215,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'author',
         'weight' => 15,
       ])
@@ -225,7 +226,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ->setTranslatable(TRUE)
       ->setDescription(t('The time that the artist was created.'))
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'timestamp',
         'weight' => 20,
       ])
@@ -255,7 +256,7 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'type' => 'boolean',
-        'label' => 'above',
+        'label' => 'inline',
         'weight' => 0,
         'settings' => [
           'format' => 'enabled-disabled',

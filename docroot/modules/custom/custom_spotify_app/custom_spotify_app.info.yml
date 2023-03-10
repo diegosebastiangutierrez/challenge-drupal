@@ -4,11 +4,13 @@ description: 'A Drupal 9 module that integrates with the Spotify API to display 
 core_version_requirement: ^8 || ^9
 package: Custom
 
+version: '1.0.0'
+
 dependencies:
   - block
   - config
-  - views
   - admin_toolbar_tools
   - options
+  - custom_spotify_entities
 
 configure: custom_spotify_app.admin_settings

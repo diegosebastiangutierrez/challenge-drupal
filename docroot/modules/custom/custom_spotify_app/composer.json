@@ -2,6 +2,7 @@
   "name": "drupal/custom_spotify_app",
   "description": "A Drupal 9 module that integrates with the Spotify API to display artist information.",
   "type": "drupal-custom-module",
+  "minimum-stability": "dev",
   "require": {
     "jwilsson/spotify-web-api-php": "^2.6"
   }

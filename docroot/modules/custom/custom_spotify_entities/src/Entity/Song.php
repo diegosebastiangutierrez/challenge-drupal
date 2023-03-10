@@ -46,7 +46,7 @@ use Drupal\link\LinkItemInterface;
  *   entity_keys = {
  *     "id" = "id",
  *     "langcode" = "langcode",
- *     "label" = "label",
+ *     "label" = "title",
  *     "uuid" = "uuid",
  *     "owner" = "uid",
  *   },
@@ -104,6 +104,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setTranslatable(false)
       ->setLabel(t('ID Of the entity on Spotify'))
       ->setRequired(TRUE)
+      ->addConstraint('UniqueField')
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
@@ -111,7 +112,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'string',
         'weight' => -5,
       ])
@@ -129,7 +130,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'link_default',
         'weight' => -5,
       ])
@@ -183,12 +184,12 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['popularity'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Popularity'))
-      ->setDescription(t('Song Popularity.'))
+    $fields['duration_ms'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Duration'))
+      ->setDescription(t('Song Duration.'))
       ->setDefaultValue(0)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'integer',
         'weight' => 0,
       ])
@@ -199,52 +200,55 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['cover_image'] = BaseFieldDefinition::create('remote_image')
-      ->setLabel(t('Song Photo External'))
-      ->setDescription(t('The Image for the Artist - external.'))
-      ->setDefaultValue('')
+    $fields['disc_number'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Disc Number'))
+      ->setDescription(t('Disc Number.'))
+      ->setDefaultValue(1)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'integer',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['track_number'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Track Number'))
+      ->setDescription(t('Disc Track Number.'))
+      ->setDefaultValue(0)
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'integer',
+        'weight' => 0,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'number',
+        'weight' => 0,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['preview_url'] = BaseFieldDefinition::create('string')
+      ->setTranslatable(FALSE)
+      ->setLabel(t('Preview Audio MP3'))
+      ->setDescription(t('Remote MP3 Preview Audio.'))
+      ->setRequired(FALSE)
+      ->setSetting('max_length', 255)
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => -5,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
-        'type' => 'image',
-        'weight' => -1,
+        'type' => 'string',
+        'weight' => -5,
       ])
-      ->setDisplayOptions('form', [
-        'type' => 'remote_image',
-        'weight' => -1,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-
-    $fields['genre'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Genre'))
-      ->setDescription(t('The Genre'))
-      ->setSetting('target_type', 'taxonomy_term')
-      ->setSetting('handler', 'default')
-      ->setSetting('handler_settings', [
-        'target_bundles' => [
-          'genre',
-        ],
-        'create_term' => TRUE,
-      ])
-      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED)
-      ->setDisplayOptions('view', [
-        'label' => 'above',
-        'type' => 'taxonomy_term_reference',
-        'weight' => 0,
-      ])
-      ->setDisplayOptions('form', [
-        'type' => 'entity_reference_autocomplete',
-        'weight' => 0,
-        'settings' => [
-          'match_operator' => 'CONTAINS',
-          'size' => '60',
-          'autocomplete_type' => 'tags',
-          'placeholder' => '',
-        ],
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
 
     $fields['uid'] = BaseFieldDefinition::create('entity_reference')
       ->setTranslatable(TRUE)
@@ -262,7 +266,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'author',
         'weight' => 15,
       ])
@@ -273,7 +277,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setTranslatable(TRUE)
       ->setDescription(t('The time that the song was created.'))
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'timestamp',
         'weight' => 20,
       ])
@@ -303,7 +307,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'type' => 'boolean',
-        'label' => 'above',
+        'label' => 'inline',
         'weight' => 0,
         'settings' => [
           'format' => 'enabled-disabled',
