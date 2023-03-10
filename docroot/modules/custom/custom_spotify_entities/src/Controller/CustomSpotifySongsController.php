@@ -50,7 +50,7 @@ class CustomSpotifySongsController extends ControllerBase {
 
     $album_storage = $this->entityTypeManager->getStorage('song');
     $album_query = $album_storage->getQuery();
-    $album_query->sort('name');
+    $album_query->sort('title');
     $album_ids = $album_query->execute();
 
     foreach ($album_ids as $album_id) {

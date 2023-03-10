@@ -49,7 +49,7 @@ class CustomSpotifyArtistsController extends ControllerBase {
 
     $artist_storage = $this->entityTypeManager->getStorage('artist');
     $artist_query = $artist_storage->getQuery();
-    $artist_query->sort('artist_name');
+    $artist_query->sort('name');
     $artist_ids = $artist_query->execute();
 
     foreach ($artist_ids as $artist_id) {

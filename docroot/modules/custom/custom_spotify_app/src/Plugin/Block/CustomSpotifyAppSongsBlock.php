@@ -86,7 +86,7 @@ class TopSongsBlock extends BlockBase implements ContainerFactoryPluginInterface
 
     foreach ($data as $track) {
       $songs[] = [
-        'name' => $track->name,
+        'title' => $track->name,
         'artist' => $track->artists[0]->name,
         'album' => $track->album->name,
         'image' => $track->album->images[0]->url,
