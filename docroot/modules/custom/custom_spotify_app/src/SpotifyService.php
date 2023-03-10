@@ -95,9 +95,9 @@ class SpotifyService {
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
       ],
       'query' => [
+        'country' => 'AR',
         'limit' => $this->getApiQueryLimit(),
         'offset' => $this->getApiQueryOffset(),
-        'country' => 'AR',
       ],
     ]);
 
@@ -134,7 +134,6 @@ class SpotifyService {
   }
 
   function getArtistAlbums($artist_id){
-
     $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/artists/' . $artist_id .'/albums', [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
@@ -147,11 +146,9 @@ class SpotifyService {
 
     $albums = json_decode($request->getBody()->getContents());
     return $albums;
-
   }
 
   function getAlbum($album_id){
-
     $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/albums/' . $album_id, [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
@@ -164,11 +161,9 @@ class SpotifyService {
 
     $album = json_decode($request->getBody()->getContents());
     return $album;
-
   }
 
   function getAlbumTracks($album_id){
-
     $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/albums/' . $album_id .'/tracks', [
       'headers' => [
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
@@ -181,7 +176,21 @@ class SpotifyService {
 
     $tracks = json_decode($request->getBody()->getContents());
     return $tracks;
+  }
 
+  function getTrack($track_id){
+    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/tracks/' . $album_id, [
+      'headers' => [
+        'Authorization' => 'Bearer ' . $this->getAccessToken(),
+      ],
+    ]);
+
+    if ($request->getStatusCode() != 200) {
+      return $request;
+    }
+
+    $tracks = json_decode($request->getBody()->getContents());
+    return $track;
   }
 
   /**
