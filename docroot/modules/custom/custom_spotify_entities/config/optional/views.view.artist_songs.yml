@@ -1,9 +1,13 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - system.menu.main
   module:
     - custom_spotify_entities
     - file
+_core:
+  default_config_hash: eAMqXPjosCv3Odn6w_O1btMPQ_FGmyRd5oFcwxHCocs
 id: artist_songs
 label: 'Artist Songs'
 module: views
@@ -73,72 +77,8 @@ display:
           hide_alter_empty: true
           click_sort_column: value
           type: string
-          settings: {  }
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-        preview_url:
-          id: preview_url
-          table: song_field_data
-          field: preview_url
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: song
-          entity_field: preview_url
-          plugin_id: field
-          label: 'Preview Audio MP3'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: false
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: file_link
           settings:
-            link_to_entity: 0
+            link_to_entity: false
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -411,6 +351,124 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        preview_url:
+          id: preview_url
+          table: song_field_data
+          field: preview_url
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: song
+          entity_field: preview_url
+          plugin_id: field
+          label: 'Preview Audio MP3'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: file_link
+          settings:
+            link_to_entity: 0
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: true
+        edit_song:
+          id: edit_song
+          table: song
+          field: edit_song
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: song
+          plugin_id: entity_link_edit
+          label: Links
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: edit
+          output_url_as_text: false
+          absolute: false
       pager:
         type: none
         options:
@@ -433,7 +491,52 @@ display:
         type: tag
         options: {  }
       empty: {  }
-      sorts: {  }
+      sorts:
+        album_target_id:
+          id: album_target_id
+          table: song__album
+          field: album_target_id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: song
+          entity_field: album
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        disc_number:
+          id: disc_number
+          table: song_field_data
+          field: disc_number
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: song
+          entity_field: disc_number
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
+        track_number:
+          id: track_number
+          table: song_field_data
+          field: track_number
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: song
+          entity_field: track_number
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: ''
+            field_identifier: ''
+          exposed: false
       arguments: {  }
       filters: {  }
       style:
@@ -468,6 +571,47 @@ display:
     display_options:
       display_extenders: {  }
       block_description: 'Artist Songs'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+      tags: {  }
+  block_2:
+    id: block_2
+    display_title: Block
+    display_plugin: block
+    position: 1
+    display_options:
+      title: 'Album Songs'
+      defaults:
+        title: false
+      display_extenders: {  }
+      block_description: 'Album Songs'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+      tags: {  }
+  page_1:
+    id: page_1
+    display_title: 'Songs Page'
+    display_plugin: page
+    position: 2
+    display_options:
+      display_description: ''
+      display_extenders: {  }
+      path: songs
+      menu:
+        type: normal
+        title: Songs
+        description: ''
+        weight: 60
+        expanded: false
+        menu_name: main
+        parent: ''
+        context: '0'
     cache_metadata:
       max-age: -1
       contexts:
