@@ -1,35 +1,3 @@
-custom_spotify_entities.artists:
-  path: '/artists'
-  defaults:
-    _title: 'Artists'
-    _controller: '\Drupal\custom_spotify_entities\Controller\CustomSpotifyArtistsController::list'
-  requirements:
-    _permission: 'access content'
-
-custom_spotify_entities.artist_detail:
-  path: '/artists/{id}'
-  defaults:
-    _title: 'Artist Detail'
-    _controller: '\Drupal\custom_spotify_entities\Controller\CustomSpotifyArtistsController::detail'
-  requirements:
-    _permission: 'access content'
-
-custom_spotify_entities.songs:
-  path: '/songs'
-  defaults:
-    _controller: '\Drupal\custom_spotify_entities\Controller\CustomSpotifySongsController::list'
-    _title: 'Songs'
-  requirements:
-    _permission: 'access content'
-
-custom_spotify_entities.albums:
-  path: '/albums'
-  defaults:
-    _controller: '\Drupal\custom_spotify_entities\Controller\CustomSpotifyAlbumsController::list'
-    _title: 'Albums'
-  requirements:
-    _permission: 'access content'
-
 entity.artist.settings:
   path: 'admin/structure/artist'
   defaults:

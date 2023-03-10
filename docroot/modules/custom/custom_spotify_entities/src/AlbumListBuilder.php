@@ -68,7 +68,7 @@ class AlbumListBuilder extends EntityListBuilder {
    */
   public function buildHeader() {
     $header['id'] = $this->t('ID');
-    $header['label'] = $this->t('Label');
+    $header['title'] = $this->t('Album Title');
     $header['status'] = $this->t('Status');
     $header['uid'] = $this->t('Author');
     $header['created'] = $this->t('Created');
