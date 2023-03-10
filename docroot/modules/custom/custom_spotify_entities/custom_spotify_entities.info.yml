@@ -1,6 +1,6 @@
 name: Custom Spotify Entities
 type: module
-description: 'Spotify App Entities created here'
+description: 'Spotify App Entities'
 core_version_requirement: ^8 || ^9
 package: Custom
 
