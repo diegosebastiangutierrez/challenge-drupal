@@ -2,5 +2,5 @@
   "name": "drupal/custom_spotify_entities",
   "description": "A Drupal 9 module that integrates with the Spotify API to add Album, Artist and Song Entities",
   "type": "drupal-custom-module",
-  "minimum-stability": "dev",
+  "minimum-stability": "dev"
 }

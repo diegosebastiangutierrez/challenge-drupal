@@ -16,6 +16,10 @@
         {
             "type": "path",
             "url": "modules/custom/custom_spotify_app"
+        },
+        {
+            "type": "path",
+            "url": "modules/custom/custom_spotify_entities"
         }
     ],
     "require": {
@@ -26,9 +30,11 @@
         "drupal/core-recommended": "9.5.4",
         "drupal/core-vendor-hardening": "^8.8",
         "drupal/ctools": "^4.0",
-        "drupal/custom_spotify_app": "dev-main",
+        "drupal/custom_spotify_app": "*",
+        "drupal/custom_spotify_entities": "*",
         "drupal/pathauto": "^1.11",
         "drupal/remote_image": "^2.0",
+        "drupal/semanticviews": "^2.3",
         "drupal/token": "^1.11",
         "drush/drush": "^11.5"
     },
