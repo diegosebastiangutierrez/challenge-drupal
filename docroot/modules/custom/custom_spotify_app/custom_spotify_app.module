@@ -14,3 +14,23 @@ function custom_spotify_app_help($route_name, RouteMatchInterface $route_match) 
       break;
   }
 }
+
+/**
+ * Implements hook_install().
+ */
+function custom_spotify_app_install() {
+
+  $theme_list = ['olivero','claro','spotify_theme'];
+
+  // Install themes.
+  \Drupal::service('theme_installer')->install($theme_list);
+
+  // Get system theme editable configs.
+  $system_theme = \Drupal::configFactory()->getEditable('system.theme');
+
+  // Set default and admin themes.
+  $system_theme
+    ->set('default', $theme_list[0])
+    ->set('admin', $theme_list[1])
+    ->save();
+}

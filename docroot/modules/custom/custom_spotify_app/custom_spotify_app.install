@@ -11,8 +11,8 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 function custom_spotify_app_install() {
 
   // Enable the pathauto, admin_toolbar and admin_toolbar_tools module.
-
   \Drupal::service('module_installer')->install(['admin_toolbar']);
   \Drupal::service('module_installer')->install(['admin_toolbar_tools']);
+  \Drupal::service('theme_installer')->install(['spotify_theme']);
 
 }

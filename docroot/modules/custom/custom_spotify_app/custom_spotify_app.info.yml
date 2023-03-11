@@ -7,11 +7,37 @@ package: Custom
 version: '1.0.0'
 
 dependencies:
-  - block
-  - config
+  - admin_toolbar
   - admin_toolbar_tools
+  - big_pipe
+  - block
+  - block_content
+  - config
+  - ctools
+  - ctools_block
+  - ctools_views
+  - datetime
+  - datetime_range
+  - ctools_entity_mask
+  - field_ui
+  - file
+  - inline_form_errors
+  - image
+  - layout_builder
+  - layout_discovery
+  - link
+  - menu_ui
+  - menu_link_content
   - options
+  - pathauto
+  - search
+  - taxonomy
+  - telephone
   - token
+  - user
+  - views
+  - views_ui
+  - semanticviews
   - custom_spotify_entities
 
 configure: custom_spotify_app.admin_settings

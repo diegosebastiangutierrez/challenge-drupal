@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - taxonomy
+id: genres_url
+label: 'Genres URL'
+type: 'canonical_entities:taxonomy_term'
+pattern: 'genre/[term:name]'
+selection_criteria:
+  db931d90-c4fd-4c37-a11d-87266a64ecc7:
+    id: 'entity_bundle:taxonomy_term'
+    negate: false
+    uuid: db931d90-c4fd-4c37-a11d-87266a64ecc7
+    context_mapping:
+      taxonomy_term: taxonomy_term
+    bundles:
+      genres: genres
+selection_logic: and
+weight: -5
+relationships: {  }

@@ -7,6 +7,8 @@ package: Custom
 version: '1.0.0'
 
 dependencies:
-  - remote_image
+  - block
+  - config
   - pathauto
   - semanticviews
+  - remote_image
