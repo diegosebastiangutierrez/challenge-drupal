@@ -670,6 +670,9 @@ display:
     display_plugin: page
     position: 1
     display_options:
+      title: Artists
+      defaults:
+        title: false
       display_extenders: {  }
       path: artists
       menu:
