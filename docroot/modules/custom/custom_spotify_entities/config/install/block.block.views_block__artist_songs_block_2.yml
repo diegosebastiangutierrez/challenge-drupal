@@ -9,7 +9,7 @@ dependencies:
   theme:
     - olivero
 _core:
-  default_config_hash: Vjoy6vZRvBKEdEbYLn-CrnAlCZRip_PK-XQSMI6_QYM
+  default_config_hash: DEGIEp-dCL32AuI0ILJTP_5jTxqDNEvg0k90eghxDbg
 id: views_block__artist_songs_block_2
 theme: olivero
 region: content
