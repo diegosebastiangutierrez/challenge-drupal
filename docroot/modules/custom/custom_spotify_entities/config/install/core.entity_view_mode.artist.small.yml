@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - custom_spotify_entities
+id: artist.small
+label: small
+targetEntityType: artist
+cache: true
