@@ -276,8 +276,6 @@ $databases = array();
  *   service requires the install profile use the 'install_profile' container
  *   parameter. Functional code can use \Drupal::installProfile().
  */
-$settings['install_profile'] = 'standard';
-
 /**
  * Salt for one-time login links, cancel links, form tokens, etc.
  *
@@ -426,7 +424,6 @@ $settings['update_free_access'] = FALSE;
  * getting cached pages from the proxy.
  */
 # $settings['omit_vary_cookie'] = TRUE;
-
 
 /**
  * Cache TTL for client error (4xx) responses.
@@ -789,10 +786,10 @@ if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 }
 $databases['default']['default'] = array (
   'database' => 'challenge-drupal',
-  'username' => 'root',
-  'password' => 'yugo7fuego',
+  'username' => '',
+  'password' => '',
   'prefix' => '',
-  'host' => 'mariadb.devel',
+  'host' => '',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
