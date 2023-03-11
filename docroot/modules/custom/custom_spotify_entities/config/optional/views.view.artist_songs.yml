@@ -1,4 +1,4 @@
-uuid: 674d83fb-5961-4712-9211-e3bcff3ae04f
+uuid: 176b00f9-1334-4b49-9bbf-610dfdc36b58
 langcode: en
 status: true
 dependencies:
@@ -8,7 +8,7 @@ dependencies:
     - custom_spotify_entities
     - file
 _core:
-  default_config_hash: 7iNxXFmtw8W7QzzgyLuu6dWOzAbbSTtUCtiHOnjw9tc
+  default_config_hash: OqIvFRjIlJcQawGoNsRulb00rXi23PEKdzYCnMX7EYY
 id: artist_songs
 label: 'Artist Songs'
 module: views

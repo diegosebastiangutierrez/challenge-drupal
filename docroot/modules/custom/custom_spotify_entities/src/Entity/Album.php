@@ -13,7 +13,6 @@ use Drupal\user\EntityOwnerTrait;
 use Drupal\Core\Url;
 use Drupal\link\LinkItemInterface;
 
-
 /**
  * Defines the album entity class.
  *
@@ -163,22 +162,6 @@ class Album extends ContentEntityBase implements AlbumInterface {
       ->setDisplayOptions('form', [
         'type' => 'remote_image',
         'weight' => -1,
-      ])
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
-    $fields['popularity'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('Popularity'))
-      ->setDescription(t('Song Popularity.'))
-      ->setDefaultValue(0)
-      ->setDisplayOptions('view', [
-        'label' => 'inline',
-        'type' => 'integer',
-        'weight' => 0,
-      ])
-      ->setDisplayOptions('form', [
-        'type' => 'number',
-        'weight' => 0,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

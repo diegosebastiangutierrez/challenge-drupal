@@ -142,13 +142,12 @@ class Artist extends ContentEntityBase implements ArtistInterface {
       ->setLabel(t('Followers'))
       ->setSetting('max_length', 255)
       ->setDisplayOptions('form', [
-        'type' => 'integer',
         'weight' => -5,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
         'label' => 'inline',
-        'type' => 'integer',
+        'type' => 'number',
         'weight' => -5,
       ])
       ->setDisplayConfigurable('view', TRUE);

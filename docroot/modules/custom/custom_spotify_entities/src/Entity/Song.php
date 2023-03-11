@@ -190,7 +190,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setDefaultValue(0)
       ->setDisplayOptions('view', [
         'label' => 'inline',
-        'type' => 'integer',
+        'type' => 'number',
         'weight' => 0,
       ])
       ->setDisplayOptions('form', [
@@ -206,7 +206,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setDefaultValue(1)
       ->setDisplayOptions('view', [
         'label' => 'inline',
-        'type' => 'integer',
+        'type' => 'number',
         'weight' => 0,
       ])
       ->setDisplayOptions('form', [
@@ -222,7 +222,7 @@ class Song extends ContentEntityBase implements SongInterface {
       ->setDefaultValue(0)
       ->setDisplayOptions('view', [
         'label' => 'inline',
-        'type' => 'integer',
+        'type' => 'number',
         'weight' => 0,
       ])
       ->setDisplayOptions('form', [

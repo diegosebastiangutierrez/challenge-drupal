@@ -7,7 +7,6 @@ package: Custom
 version: '1.0.0'
 
 dependencies:
-  - entity
   - remote_image
   - pathauto
   - semanticviews
