@@ -3,9 +3,14 @@ status: true
 dependencies:
   module:
     - custom_spotify_entities
+    - layout_builder
     - link
     - remote_image
     - taxonomy
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
 _core:
   default_config_hash: M5K4mS56rdl8SFwElczWB9kOJ1v74O5FV3QMO8wUgtI
 id: album.album.default
@@ -14,10 +19,11 @@ bundle: album
 mode: default
 content:
   artist:
-    type: entity_reference_label
+    type: entity_reference_entity_view
     label: hidden
     settings:
-      link: true
+      view_mode: small
+      link: false
     third_party_settings: {  }
     weight: 1
     region: content
