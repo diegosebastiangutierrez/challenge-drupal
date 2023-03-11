@@ -1,0 +1,65 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.artist.small
+  module:
+    - custom_spotify_entities
+    - layout_builder
+    - link
+    - remote_image
+third_party_settings:
+  layout_builder:
+    enabled: false
+    allow_custom: false
+_core:
+  default_config_hash: itoW_ZcBzRz3i_4sYavwdTVakxuwaQbDLB7Ql82sEI4
+id: artist.artist.small
+targetEntityType: artist
+bundle: artist
+mode: small
+content:
+  cover_image:
+    type: remote_image
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  followers:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  name:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  spotify_detail_url:
+    type: link_separate
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+hidden:
+  created: true
+  genre: true
+  langcode: true
+  layout_builder__layout: true
+  spotify_id: true
+  status: true
+  uid: true
