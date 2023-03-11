@@ -6,6 +6,8 @@ dependencies:
     - link
     - remote_image
     - taxonomy
+_core:
+  default_config_hash: M5K4mS56rdl8SFwElczWB9kOJ1v74O5FV3QMO8wUgtI
 id: album.album.default
 targetEntityType: album
 bundle: album

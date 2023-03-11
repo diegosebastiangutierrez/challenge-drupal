@@ -5,7 +5,7 @@ dependencies:
     - custom_spotify_entities
     - link
 _core:
-  default_config_hash: GsjLw7rpdyc2lf0yWLSjYocmZk5sdVdWvicHQN2d_3M
+  default_config_hash: aWDJwuqELPtY_s3j-juLUP3EBC_-zd5oIEFFMWgvrwk
 id: song.song.default
 targetEntityType: song
 bundle: song
