@@ -84,32 +84,6 @@ class SpotifyService {
   }
 
   /**
-   * Get New Releases.
-   *
-   * @return array
-   *  The response body with all songs or with errors.
-   */
-  function getNewReleases() {
-    $request = $this->http_client->request('GET', 'https://api.spotify.com/v1/browse/new-releases', [
-      'headers' => [
-        'Authorization' => 'Bearer ' . $this->getAccessToken(),
-      ],
-      'query' => [
-        'country' => 'AR',
-        'limit' => $this->getApiQueryLimit(),
-        'offset' => $this->getApiQueryOffset(),
-      ],
-    ]);
-
-    if ($request->getStatusCode() != 200) {
-      return $request;
-    }
-
-    $songs = json_decode($request->getBody()->getContents());
-    return $songs;
-  }
-
-  /**
    * Get artist.
    *
    * @param string $artist_id
@@ -138,6 +112,12 @@ class SpotifyService {
       'headers' => [
         'Authorization' => 'Bearer ' . $this->getAccessToken(),
       ],
+      'query' => [
+        'inlude_groups' => 'album',
+        'limit' => 10,
+        'offset' => 0,
+      ],
+
     ]);
 
     if ($request->getStatusCode() != 200) {

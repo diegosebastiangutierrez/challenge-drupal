@@ -11,7 +11,7 @@ dependencies:
   - config
   - admin_toolbar_tools
   - options
-  - entity
+  - token
   - custom_spotify_entities
 
 configure: custom_spotify_app.admin_settings
