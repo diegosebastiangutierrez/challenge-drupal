@@ -129,10 +129,10 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: span
+          element_type: ''
           element_class: ''
-          element_label_type: '0'
-          element_label_class: ''
+          element_label_type: span
+          element_label_class: field__label
           element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
@@ -142,10 +142,8 @@ display:
           empty_zero: false
           hide_alter_empty: true
           click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: false
+          type: number_unformatted
+          settings: {  }
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -194,9 +192,9 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: '0'
+          element_type: span
           element_class: ''
-          element_label_type: span
+          element_label_type: ''
           element_label_class: ''
           element_label_colon: false
           element_wrapper_type: ''
@@ -464,7 +462,8 @@ display:
         type: fields
         options:
           default_field_elements: false
-          inline: {  }
+          inline:
+            followers: followers
           separator: ''
           hide_empty: false
       query:
