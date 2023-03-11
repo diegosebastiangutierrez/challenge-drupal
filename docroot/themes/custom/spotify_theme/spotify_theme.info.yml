@@ -2,4 +2,34 @@ name: Spotify Theme
 type: theme
 description: A custom theme for displaying the home page, songs page, artists page, album details page and song page.
 core_version_requirement: ^8 || ^9
-base theme: classy
+base theme: olivero
+
+libraries:
+  - spotify_theme/global-styling
+
+regions:
+  header: Header
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  hero: 'Hero (full width)'
+  highlighted: Highlighted
+  breadcrumb: Breadcrumb
+  social: Social Bar
+  content_above: Content Above
+  content: Content
+  sidebar: 'Sidebar'
+  content_below: 'Content Below'
+  footer_top: 'Footer Top'
+  footer_bottom: 'Footer Bottom'
+
+libraries-override:
+  olivero/global-styling:
+    css:
+      base:
+        css/base/fonts.css: css/base/fonts.css
+        css/base/base.css: css/base/base.css
+        css/base/utility.css: css/base/utility.css
+      component:
+        css/components/header-site-branding.css: css/components/header-site-branding.css
+        css/components/footer.css: css/components/footer.css
+

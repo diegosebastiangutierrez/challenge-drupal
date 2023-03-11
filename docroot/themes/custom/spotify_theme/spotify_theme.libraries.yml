@@ -1,5 +1,10 @@
-global-css:
-  version: 1.x
+global-styling:
+  js:
+    js/theme.js: {}
   css:
-    theme:
-      css/style.css: {}
+    base:
+      css/theme.css: {}
+      css/base/base.css: {}
+    component:
+      css/components/header-site-branding.css: {}
+      css/components/footer.css: {}
