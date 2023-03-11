@@ -9,7 +9,7 @@ dependencies:
     - remote_image
     - semanticviews
 _core:
-  default_config_hash: OqIvFRjIlJcQawGoNsRulb00rXi23PEKdzYCnMX7EYY
+  default_config_hash: rRh1p22PiqTMKsrME67qm9fcno1Hi-b00cLT3wS0cRU
 id: artist_songs
 label: 'Artist Songs'
 module: views
@@ -509,7 +509,18 @@ display:
           results_lifespan_custom: 0
           output_lifespan: 300
           output_lifespan_custom: 0
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: 'Your Search yielded no results. Please continue browsing.'
+          tokenize: false
       sorts:
         album_target_id:
           id: album_target_id

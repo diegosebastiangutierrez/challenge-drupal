@@ -7,6 +7,8 @@ dependencies:
     - custom_spotify_entities
     - remote_image
     - semanticviews
+_core:
+  default_config_hash: jhqqgHQilpLEY-DTaSwvrRwN0-FeOqsV9VSVBNNytQc
 id: artist_albums
 label: 'Artist Albums'
 module: views
@@ -238,7 +240,18 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: 'Your Search yielded no results. Please continue browsing.'
+          tokenize: false
       sorts:
         release_date:
           id: release_date

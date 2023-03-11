@@ -7,9 +7,8 @@ dependencies:
     - custom_spotify_entities
     - link
     - remote_image
-    - semanticviews
 _core:
-  default_config_hash: iH54kz7EnXK2phCTkrOYCnhgWOfgrbHsDWsfvfonYoA
+  default_config_hash: K-Nn4h3RptizGjosNd2E0ZQbWRFSGCvXAvwo8wsaiVU
 id: artists
 label: Artists
 module: views
@@ -65,7 +64,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: ''
+          element_type: h2
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -91,6 +90,125 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
+        followers:
+          id: followers
+          table: artist_field_data
+          field: followers
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: artist
+          entity_field: followers
+          plugin_id: field
+          label: Followers
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: span
+          element_class: ''
+          element_label_type: '0'
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        view_artist:
+          id: view_artist
+          table: artist
+          field: view_artist
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: artist
+          plugin_id: entity_link
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: '0'
+          element_class: ''
+          element_label_type: span
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: 'View More'
+          output_url_as_text: false
+          absolute: true
         cover_image__alt:
           id: cover_image__alt
           table: artist_field_data
@@ -130,7 +248,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: ''
+          element_type: figure
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -194,7 +312,7 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: ''
+          element_type: footer
           element_class: ''
           element_label_type: ''
           element_label_class: ''
@@ -224,59 +342,6 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        view_artist:
-          id: view_artist
-          table: artist
-          field: view_artist
-          relationship: none
-          group_type: group
-          admin_label: ''
-          entity_type: artist
-          plugin_id: entity_link
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: footer
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: false
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          text: 'View More'
-          output_url_as_text: false
-          absolute: true
       pager:
         type: mini
         options:
@@ -311,7 +376,18 @@ display:
       cache:
         type: tag
         options: {  }
-      empty: {  }
+      empty:
+        area_text_custom:
+          id: area_text_custom
+          table: views
+          field: area_text_custom
+          relationship: none
+          group_type: group
+          admin_label: ''
+          plugin_id: text_custom
+          empty: true
+          content: 'Your Search yielded no results. Please continue browsing.'
+          tokenize: false
       sorts:
         name:
           id: name
@@ -381,26 +457,16 @@ display:
           automatic_width: true
           alignment: horizontal
           row_class_custom: ''
-          row_class_default: false
+          row_class_default: true
           col_class_custom: ''
           col_class_default: true
       row:
-        type: semanticviews_row
+        type: fields
         options:
-          skip_blank: 0
-          semantic_html:
-            name:
-              element_type: h2
-              attributes: ''
-            cover_image__alt:
-              element_type: figure
-              attributes: ''
-            spotify_detail_url__uri:
-              element_type: ''
-              attributes: ''
-            view_artist:
-              element_type: ''
-              attributes: ''
+          default_field_elements: false
+          inline: {  }
+          separator: ''
+          hide_empty: false
       query:
         type: views_query
         options:
