@@ -32,7 +32,6 @@
         "drupal/ctools": "^4.0",
         "drupal/custom_spotify_app": "*",
         "drupal/custom_spotify_entities": "*",
-        "drupal/entity": "^1.4",
         "drupal/pathauto": "^1.11",
         "drupal/remote_image": "^2.0",
         "drupal/semanticviews": "^2.3",
