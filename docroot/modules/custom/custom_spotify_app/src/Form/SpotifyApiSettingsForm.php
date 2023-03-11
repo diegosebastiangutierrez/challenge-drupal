@@ -229,55 +229,55 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
     $artists_data = $api->getArtists('3fMbdgg4jU18AjLCKBhRSm,2UZIAOlrnyZmyzt1nuXr9y,6tbjWDEIzxoDsBA1FuhfPW,5lpH0xAS4fVfLkACg9DAuM,4RVnAU35WRWra6OZ3CbbMA,1zuJe6b1roixEKMOtyrEak,5rSXSAkZ67PYJSvpUpkOr7,6Ff53KvcvAj5U7Z1vojB5o,26dSoYclwsYLMAKD3tpOr4,5pKCCKE2ajJHZ9KAiaK11H,0Ty63ceoRnnJKVEYP0VQpk,762310PdDnwsDxAQxzQkfX,1eClJfHLoDI4rZe5HxzBFv,1w5Kfo2jwwIPruYS2UWh56,4Z8W4fKeB5YxbusRsdQVPb');
 
 
-    foreach ($artists_data->artists as $artist_data) {
+    foreach ($artists_data->artists as $artist) {
 
       // Check if the artist entity already exists.
       $artist_entity = \Drupal::entityTypeManager()
       ->getStorage('artist')
-      ->loadByProperties(['spotify_id' => $artist_data->id]);
+      ->loadByProperties(['spotify_id' => $artist->id]);
 
       // If artist is not on database we create it
       if (!$artist_entity) {
 
         // Add the genre terms to the artist.
-        $genre_terms = [];
+        $artist_genre_terms = [];
 
-        foreach ($artist_data->genres as $genre_name) {
+        foreach ($artist->genres as $genre_name) {
           // Look up or create the genre term.
-          $genre_term = \Drupal::entityTypeManager()
+          $artist_genre_term = \Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')->loadByProperties(['vid' => 'genres', 'name' => $genre_name]);
 
-          if (!$genre_term) {
-            $genre_term = Term::create([
+          if (!$artist_genre_term) {
+            $artist_genre_term = Term::create([
               'name' => $genre_name,
               'vid' => 'genres',
             ]);
-            $genre_term->save();
+            $artist_genre_term->save();
           }
-          array_push($genre_terms, ['target_id' => $genre_term->tid]);
+          $artist_genre_terms[] = $artist_genre_term;
         }
 
         // Create the artist entity.
         $artist_entity = Artist::create([
-          'name' => $artist_data->name,
-          'spotify_id' => $artist_data->id,
-          'spotify_detail_url' => $artist_data->external_urls->spotify,
-          'popularity' => $artist_data->popularity,
-          'followers' => $artist_data->followers->total,
-          'genre' => $genre_terms,
+          'name' => $artist->name,
+          'spotify_id' => $artist->id,
+          'spotify_detail_url' => $artist->external_urls->spotify,
+          'popularity' => $artist->popularity,
+          'followers' => $artist->followers->total,
+          'genre' => $artist_genre_terms,
           'cover_image' => [
-            'uri' => $artist_data->images[0]->url,
-            'width' => $artist_data->images[0]->width,
-            'height' => $artist_data->images[0]->height,
-            'alt' => $artist_data->name,
-            'title' => $artist_data->name,
+            'uri' => $artist->images[0]->url,
+            'width' => $artist->images[0]->width,
+            'height' => $artist->images[0]->height,
+            'alt' => $artist->name,
+            'title' => $artist->name,
           ],
         ]);
         $artist_entity->save();
       }
 
       // Now we get the artist albums
-      $artist_albums = $api->getArtistAlbums($artist_data->id);
+      $artist_albums = $api->getArtistAlbums($artist->id);
 
       foreach ($artist_albums->items as $album) {
 
@@ -287,28 +287,28 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
 
         if (!$album_entity) {
           // Add the genre terms to the album.
-          $genre_terms = [];
+          $album_genre_terms = [];
 
           foreach ($album->genres as $genre_name) {
             // Look up or create the genre term.
-            $genre_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'genres', 'name' => $genre_name]);
+            $album_genre_term = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadByProperties(['vid' => 'genres', 'name' => $genre_name]);
 
-            if (!$genre_term) {
-              $genre_term = Term::create([
+            if (!$album_genre_term) {
+              $album_genre_term = Term::create([
                 'name' => $genre_name,
                 'vid' => 'genres',
               ]);
-              $genre_term->save();
+              $album_genre_term->save();
             }
-            array_push($genre_terms, ['target_id' => $genre_term->tid]);
+            $album_genre_terms[] = $album_genre_term;
           }
           // Create the album entity.
           $album_entity = Album::create([
             'spotify_id' => $album->id,
             'spotify_detail_url' => $album->external_urls->spotify,
             'title' => $album->name,
-            'genre' => $genre_terms,
-            'artist' => $artist_data,
+            'genre' => $album_genre_terms,
+            //'artist' => ['target_id' => $artist_entity->id],
             'popularity' => $album->popularity,
             'release_date' => $album->release_date,
             'cover_image' => [
