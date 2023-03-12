@@ -36,6 +36,7 @@
         "drupal/remote_image": "^2.0",
         "drupal/semanticviews": "^2.3",
         "drupal/token": "^1.11",
+        "drupal/views_autosubmit": "^1.5",
         "drush/drush": "^11.5"
     },
     "conflict": {
