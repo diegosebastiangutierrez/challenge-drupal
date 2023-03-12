@@ -122,16 +122,25 @@ class Artist extends ContentEntityBase implements ArtistInterface {
     $fields['spotify_detail_url'] = BaseFieldDefinition::create('link')
       ->setTranslatable(false)
       ->setLabel(t('Detail url on Spotify'))
+      ->setDefaultValue([
+          'uri' => 'https://open.spotify.com/',
+          'title' => 'Go onto Spotify',
+          'options' => [
+            'attributes' => [
+              'target' => '_blank',
+            ],
+          ],
+        ])
       ->setSetting('title','link')
       ->setSetting('link_type', LinkItemInterface::LINK_EXTERNAL)
       ->setRequired(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('form', [
         'type' => 'link',
         'weight' => -5,
       ])
-      ->setDisplayConfigurable('form', TRUE)
       ->setDisplayOptions('view', [
-        'label' => 'above',
+        'label' => 'inline',
         'type' => 'link_default',
         'weight' => -5,
       ])

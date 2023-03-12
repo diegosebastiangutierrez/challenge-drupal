@@ -10,5 +10,6 @@ dependencies:
   - block
   - config
   - pathauto
-  - semanticviews
   - remote_image
+  - semanticviews
+  - views_autosubmit
