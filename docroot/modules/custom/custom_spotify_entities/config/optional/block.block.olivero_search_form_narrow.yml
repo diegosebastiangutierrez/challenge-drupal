@@ -4,16 +4,16 @@ dependencies:
   module:
     - search
   theme:
-    - spotify_theme
-id: spotify_theme_search_form_wide
-theme: spotify_theme
-region: secondary_menu
-weight: -5
+    - olivero
+id: olivero_search_form_narrow
+theme: olivero
+region: primary_menu
+weight: -4
 provider: null
 plugin: search_form_block
 settings:
   id: search_form_block
-  label: 'Search form (wide)'
+  label: 'Search form (narrow)'
   label_display: '0'
   provider: search
   page_id: ''

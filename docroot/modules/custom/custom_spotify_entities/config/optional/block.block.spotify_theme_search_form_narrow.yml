@@ -5,8 +5,6 @@ dependencies:
     - search
   theme:
     - spotify_theme
-_core:
-  default_config_hash: yEBET0cqDbk8dkWzaJw-8CKft0961VBflsISoSR6Lj8
 id: spotify_theme_search_form_narrow
 theme: spotify_theme
 region: primary_menu

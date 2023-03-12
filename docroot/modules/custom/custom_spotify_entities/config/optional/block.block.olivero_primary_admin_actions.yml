@@ -2,9 +2,9 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - spotify_theme
-id: spotify_theme_primary_admin_actions
-theme: spotify_theme
+    - olivero
+id: olivero_primary_admin_actions
+theme: olivero
 region: highlighted
 weight: -5
 provider: null

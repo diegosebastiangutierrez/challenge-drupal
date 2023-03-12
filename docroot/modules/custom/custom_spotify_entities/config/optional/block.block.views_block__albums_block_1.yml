@@ -2,22 +2,20 @@ langcode: en
 status: true
 dependencies:
   config:
-    - views.view.artist_songs
+    - views.view.albums
   module:
     - system
     - views
   theme:
     - spotify_theme
-_core:
-  default_config_hash: OEp3PuUCqIN2uhOoXRg3302a1u8CSMZNddFhTqHDus4
-id: spotify_theme_views_block__artist_songs_block_1
+id: views_block__albums_block_1
 theme: spotify_theme
-region: content
-weight: -7
+region: content_below
+weight: 0
 provider: null
-plugin: 'views_block:artist_songs-block_1'
+plugin: 'views_block:albums-block_1'
 settings:
-  id: 'views_block:artist_songs-block_1'
+  id: 'views_block:albums-block_1'
   label: ''
   label_display: visible
   provider: views
@@ -25,6 +23,7 @@ settings:
   views_label: ''
   items_per_page: none
   exposed: {  }
+  context_mapping: {  }
 visibility:
   request_path:
     id: request_path

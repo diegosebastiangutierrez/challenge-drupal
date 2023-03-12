@@ -4,11 +4,11 @@ dependencies:
   module:
     - node
   theme:
-    - spotify_theme
-id: spotify_theme_syndicate
-theme: spotify_theme
+    - olivero
+id: olivero_syndicate
+theme: olivero
 region: social
-weight: -8
+weight: 0
 provider: null
 plugin: node_syndicate_block
 settings:

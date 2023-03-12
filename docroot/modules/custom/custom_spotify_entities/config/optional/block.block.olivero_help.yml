@@ -4,11 +4,11 @@ dependencies:
   module:
     - help
   theme:
-    - spotify_theme
-id: spotify_theme_help
-theme: spotify_theme
+    - olivero
+id: olivero_help
+theme: olivero
 region: content_above
-weight: -7
+weight: 0
 provider: null
 plugin: help_block
 settings:

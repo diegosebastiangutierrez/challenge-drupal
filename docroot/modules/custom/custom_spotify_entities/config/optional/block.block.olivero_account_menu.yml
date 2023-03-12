@@ -6,9 +6,9 @@ dependencies:
   module:
     - system
   theme:
-    - spotify_theme
-id: spotify_theme_account_menu
-theme: spotify_theme
+    - olivero
+id: olivero_account_menu
+theme: olivero
 region: secondary_menu
 weight: -4
 provider: null

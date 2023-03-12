@@ -9,8 +9,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: itoW_ZcBzRz3i_4sYavwdTVakxuwaQbDLB7Ql82sEI4
 id: artist.artist.default
 targetEntityType: artist
 bundle: artist

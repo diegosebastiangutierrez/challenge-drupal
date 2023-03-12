@@ -4,9 +4,9 @@ dependencies:
   module:
     - system
   theme:
-    - spotify_theme
-id: spotify_theme_messages
-theme: spotify_theme
+    - olivero
+id: olivero_messages
+theme: olivero
 region: highlighted
 weight: -5
 provider: null

@@ -1,14 +1,11 @@
-_core:
-  default_config_hash: l58O_yEXSo-SeJi19LXdzTU1tNJG3lmnIhCitRkM1tk
 langcode: en
-uuid: 091fcb3d-ebe2-4ec3-b571-3f3d2d146b70
 name: 'Challenge Drupal Spotify API'
-mail: corazondigital@gmail.com
+mail: you@hire.me
 slogan: ''
 page:
   403: ''
   404: ''
-  front: /user/login
+  front: /node
 admin_compact_mode: false
 weight_select_max: 100
 default_langcode: en

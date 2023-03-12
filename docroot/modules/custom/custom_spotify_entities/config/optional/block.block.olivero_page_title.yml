@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - spotify_theme
-id: spotify_theme_page_title
-theme: spotify_theme
+    - olivero
+id: olivero_page_title
+theme: olivero
 region: content_above
-weight: -8
+weight: -5
 provider: null
 plugin: page_title_block
 settings:

@@ -1,17 +1,12 @@
-_core:
-  default_config_hash: Ylohp6sdrL1dU4v-KcXzXTP-U8BAMgh4NWJA9eGHtO4
-favicon:
-  use_default: true
 features:
-  comment_user_picture: true
-  comment_user_verification: true
-  favicon: true
-  node_user_picture: false
+  node_user_picture: 1
+  comment_user_picture: 1
+  comment_user_verification: 1
+  favicon: 1
 logo:
-  path: 'public://Spotify_Logo_RGB_Green.png'
-  use_default: false
-third_party_settings:
-  shortcut:
-    module_link: true
+  use_default: 0
+  path: 'public://Spotify_Logo_RGB_White.png'
+favicon:
+  use_default: 1
 mobile_menu_all_widths: 0
 site_branding_bg_color: default

@@ -4,11 +4,11 @@ dependencies:
   module:
     - system
   theme:
-    - spotify_theme
-id: spotify_theme_content
-theme: spotify_theme
+    - olivero
+id: olivero_content
+theme: olivero
 region: content
-weight: -9
+weight: 0
 provider: null
 plugin: system_main_block
 settings:

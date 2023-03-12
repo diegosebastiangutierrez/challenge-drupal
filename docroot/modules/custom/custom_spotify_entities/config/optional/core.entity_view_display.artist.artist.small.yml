@@ -12,8 +12,6 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
-_core:
-  default_config_hash: itoW_ZcBzRz3i_4sYavwdTVakxuwaQbDLB7Ql82sEI4
 id: artist.artist.small
 targetEntityType: artist
 bundle: artist
@@ -58,8 +56,8 @@ content:
 hidden:
   created: true
   genre: true
-  langcode: true
   layout_builder__layout: true
   spotify_id: true
   status: true
+  langcode: true
   uid: true

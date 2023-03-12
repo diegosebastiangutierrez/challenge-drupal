@@ -2,20 +2,20 @@ langcode: en
 status: true
 dependencies:
   config:
-    - views.view.artist_albums
+    - views.view.songs
   module:
     - system
     - views
   theme:
     - spotify_theme
-id: spotify_theme_views_block__artist_albums_block_1
+id: views_block__songs_block_2
 theme: spotify_theme
-region: content_below
-weight: -8
+region: content
+weight: 0
 provider: null
-plugin: 'views_block:artist_albums-block_1'
+plugin: 'views_block:songs-block_2'
 settings:
-  id: 'views_block:artist_albums-block_1'
+  id: 'views_block:songs-block_2'
   label: ''
   label_display: visible
   provider: views
@@ -27,4 +27,4 @@ visibility:
   request_path:
     id: request_path
     negate: false
-    pages: '/artist/*'
+    pages: '/album/*'
