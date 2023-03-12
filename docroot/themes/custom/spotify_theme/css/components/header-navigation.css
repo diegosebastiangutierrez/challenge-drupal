@@ -57,8 +57,8 @@
    * use padding because that would enable the button to scroll out of the
    * viewport on short screens.
    */
-  border-top: solid #fff 3.375rem;
-  background-color: #fff;
+  border-top: solid #efefef 3.375rem;
+  background-color: #efefef;
   box-shadow: 0 0 72px rgba(0, 0, 0, 0.1);
 }
 

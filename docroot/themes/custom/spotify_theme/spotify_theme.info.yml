@@ -6,6 +6,7 @@ base theme: olivero
 
 libraries:
   - spotify_theme/global-styling
+  - spotify_theme/global-scripting
 
 regions:
   header: Header
@@ -31,5 +32,10 @@ libraries-override:
         css/base/utility.css: css/base/utility.css
       component:
         css/components/header-site-branding.css: css/components/header-site-branding.css
+        css/components/header-search-wide.css: css/components/header-search-wide-2.css
+        css/components/header-sticky-toggle.css: css/components/header-sticky-toggle.css
+        css/components/header-navigation.css: css/components/header-navigation.css
+        css/components/site-header.css: css/components/site-header.css
         css/components/footer.css: css/components/footer.css
-
+        css/components/breadcrumb.css: css/components/breadcrumb.css
+        css/layout/social-bar.css: css/layout/social-bar.css

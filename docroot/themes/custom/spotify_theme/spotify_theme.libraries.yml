@@ -1,10 +1,19 @@
-global-styling:
+global-scripting:
   js:
     js/theme.js: {}
+
+global-styling:
   css:
-    base:
+    theme:
       css/theme.css: {}
+    base:
       css/base/base.css: {}
     component:
       css/components/header-site-branding.css: {}
+      css/layout/social-bar.css: {}
+      css/components/header-search-wide.css: {}
+      css/components/header-sticky-toggle.css: {}
+      css/components/header-navigation.css: {}
+      css/components/site-header.css: {}
+      css/components/breadcrumb.css: []
       css/components/footer.css: {}

@@ -35,7 +35,7 @@
   align-items: flex-end;
   -ms-grid-row-align: stretch;
   align-self: stretch;
-  background-color: #2494db;
+  background-color: #169c46;
 }
 
 .site-header__fixable {
@@ -73,7 +73,7 @@
   z-index: 1; /* Appear in front of Drupal's tabs. */
   flex-grow: 1;
   width: calc(100vw - 5.625rem);
-  background: #fff;
+  background: #efefef;
 }
 
 /*

@@ -1,0 +1,89 @@
+/*************************************
+ *** HERE STARTS MY CUSTOMIZATION ***
+ **********************************/
+ /********Diego*Gutierrez*********/
+.
+.parallax__header{
+  overflow-y: hidden;
+  z-index: 10;
+  height: 50vh;
+}
+.parallax__header img{
+  display:flex;
+  justify-content: center;
+  z-index: 0;
+  width: 100%;
+  margin-top: -40px;
+}
+
+.parallax__caption {
+  display:inline-block;
+  float:right;
+  bottom:0;
+  right:0;
+  padding: .5rem .7rem;
+  margin: .2rem;
+  background:rgb(0,0,0);
+  color: white;
+  font-weight: bold;
+  text-align:right;
+  position:sticky;
+  border-top: 3px solid #169c46;
+}
+
+audio{
+  min-width:300px;
+  width:100%;
+  margin:1rem 0 2rem;
+}
+
+.views-table td{
+  align-items:center;
+}
+
+.views-table audio{
+  margin:0;
+  height: 28px;
+}
+
+
+.block-views-blockartist-albums-block-1 label{
+  font-size:1.1rem;
+  font-weight:500;
+  margin:1.1rem 0 0;
+  display:inline-block;
+}
+
+.block-views-blockartist-albums-block-1 label a{
+  color: #169c46;
+  color: #734d85;
+}
+
+.block-views-blockartist-albums-block-1 footer{
+  font-size:.8rem;
+  margin:.5rem 0 1rem;
+
+}
+
+.block-views-blockartist-albums-block-1 footer a{
+color: #000;
+font-weight: bold;
+}
+
+
+.view-filters {
+border:1px solid red;
+}
+
+
+.views-table {
+width: 100%;
+}
+
+nav.pager {
+display: flex;
+justify-content:center;
+
+}
+
+
