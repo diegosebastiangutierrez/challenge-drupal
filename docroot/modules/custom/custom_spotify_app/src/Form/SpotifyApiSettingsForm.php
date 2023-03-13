@@ -184,6 +184,12 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+
+    if (!$form_state->getValue('spotify_access_token')) {
+      $service = \Drupal::service('custom_spotify_app.api_service')->auth();
+      $form_state->setValue('spotify_access_token', $service->access_token);
+    }
+
     // Retrieve the configuration.
     $this->config(static::SETTINGS)
       ->set('spotify_access_token', $form_state->getValue('spotify_access_token'))
@@ -198,16 +204,6 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       ->save();
 
     parent::submitForm($form, $form_state);
-  }
-
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
-
-    if (!$form_state->getValue('spotify_access_token')) {
-      $service = \Drupal::service('custom_spotify_app.api_service')->auth();
-      $form_state->setValue('spotify_access_token', $service->access_token);
-      $form_state->setRebuild();
-    }
   }
 
   public function custom_spotify_app_create_entities_from_spotify_api() {
@@ -278,7 +274,7 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
       }
 
       // Now we get the artist albums
-      $artist_albums = $api->getArtistAlbums($artist->id, ['limit' => 5, 'market' => 'AR']);
+      $artist_albums = $api->getArtistAlbums($artist->id, ['limit' => 8, 'market' => 'AR']);
 
       foreach ($artist_albums->items as $album) {
 
@@ -346,7 +342,6 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
               'track_number' => $song_data->track_number,
               'duration_ms' => $song_data->duration_ms,
               'preview_url' => $song_data->preview_url,
-              'album' => $album_data,
               'genre' => $album_genre_terms,
             ]);
             $song_entity->save();

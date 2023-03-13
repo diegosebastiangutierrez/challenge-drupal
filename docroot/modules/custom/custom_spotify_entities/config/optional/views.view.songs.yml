@@ -8,7 +8,6 @@ dependencies:
     - file
     - remote_image
     - semanticviews
-    - taxonomy
     - views_autosubmit
 id: songs
 label: songs
@@ -659,17 +658,17 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-        genre_target_id:
-          id: genre_target_id
-          table: artist__genre
-          field: genre_target_id
-          relationship: artist_target_id
+        album_target_id:
+          id: album_target_id
+          table: song__album
+          field: album_target_id
+          relationship: none
           group_type: group
           admin_label: ''
-          entity_type: artist
-          entity_field: genre
+          entity_type: song
+          entity_field: album
           plugin_id: field
-          label: Genre
+          label: Album
           exclude: false
           alter:
             alter_text: false
@@ -702,10 +701,10 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
-          element_default_classes: false
+          element_default_classes: true
           empty: ''
           hide_empty: false
           empty_zero: false
@@ -713,7 +712,7 @@ display:
           click_sort_column: target_id
           type: entity_reference_label
           settings:
-            link: false
+            link: true
           group_column: target_id
           group_columns: {  }
           group_rows: true
@@ -839,19 +838,50 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          text: Go!
+          text: 'More Info'
           output_url_as_text: false
-          absolute: false
-      arguments:
-        artist_target_id:
-          id: artist_target_id
-          table: song__artist
-          field: artist_target_id
+          absolute: true
+      sorts:
+        title:
+          id: title
+          table: song_field_data
+          field: title
           relationship: none
           group_type: group
           admin_label: ''
           entity_type: song
-          entity_field: artist
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: 'Song Title'
+            field_identifier: title
+          exposed: true
+        title_1:
+          id: title_1
+          table: album_field_data
+          field: title
+          relationship: album_target_id
+          group_type: group
+          admin_label: ''
+          entity_type: album
+          entity_field: title
+          plugin_id: standard
+          order: ASC
+          expose:
+            label: Album
+            field_identifier: title_1
+          exposed: true
+      arguments:
+        id:
+          id: id
+          table: artist_field_data
+          field: id
+          relationship: artist_target_id
+          group_type: group
+          admin_label: ''
+          entity_type: artist
+          entity_field: id
           plugin_id: numeric
           default_action: default
           exception:
@@ -874,11 +904,15 @@ display:
             sort_order: asc
             number_of_records: 0
             format: default_summary
-          specify_validation: false
+          specify_validation: true
           validate:
-            type: none
-            fail: 'not found'
-          validate_options: {  }
+            type: 'entity:artist'
+            fail: empty
+          validate_options:
+            bundles: {  }
+            access: false
+            operation: view
+            multiple: 0
           break_phrase: false
           not: false
       filters:
@@ -898,7 +932,7 @@ display:
           exposed: true
           expose:
             operator_id: title_op
-            label: 'Song Title'
+            label: Song
             description: ''
             use_operator: false
             operator: title_op
@@ -926,73 +960,50 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-        genre_target_id:
-          id: genre_target_id
-          table: artist__genre
-          field: genre_target_id
-          relationship: artist_target_id
+        title_1:
+          id: title_1
+          table: album_field_data
+          field: title
+          relationship: album_target_id
           group_type: group
           admin_label: ''
-          entity_type: artist
-          entity_field: genre
-          plugin_id: numeric
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
+          entity_type: album
+          entity_field: title
+          plugin_id: string
+          operator: contains
+          value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: genre_target_id_op
-            label: Genre
-            description: null
+            operator_id: title_1_op
+            label: Album
+            description: ''
             use_operator: false
-            operator: genre_target_id_op
+            operator: title_1_op
             operator_limit_selection: false
             operator_list: {  }
-            identifier: genre_target_id
+            identifier: title_1
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-            min_placeholder: null
-            max_placeholder: null
-            placeholder: null
-          is_grouped: true
+              anonymous: '0'
+              content_editor: '0'
+              administrator: '0'
+            placeholder: ''
+          is_grouped: false
           group_info:
-            label: Genre
+            label: ''
             description: ''
-            identifier: genre_target_id
+            identifier: ''
             optional: true
             widget: select
             multiple: false
-            remember: true
+            remember: false
             default_group: All
             default_group_multiple: {  }
-            group_items:
-              1:
-                title: ''
-                operator: '='
-                value:
-                  min: ''
-                  max: ''
-                  value: ''
-              2:
-                title: ''
-                operator: '='
-                value:
-                  min: ''
-                  max: ''
-                  value: ''
-              3:
-                title: ''
-                operator: '='
-                value:
-                  min: ''
-                  max: ''
-                  value: ''
+            group_items: {  }
       filter_groups:
         operator: AND
         groups:
@@ -1000,6 +1011,7 @@ display:
       defaults:
         relationships: false
         fields: false
+        sorts: false
         arguments: false
         filters: false
         filter_groups: false
@@ -1015,15 +1027,15 @@ display:
           entity_field: artist
           plugin_id: standard
           required: true
-        genre_target_id:
-          id: genre_target_id
-          table: artist__genre
-          field: genre_target_id
-          relationship: artist_target_id
+        album_target_id:
+          id: album_target_id
+          table: song__album
+          field: album_target_id
+          relationship: none
           group_type: group
-          admin_label: 'Taxonomy term'
-          entity_type: artist
-          entity_field: genre
+          admin_label: Album
+          entity_type: song
+          entity_field: album
           plugin_id: standard
           required: true
       display_description: ''
@@ -1036,6 +1048,8 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'url.query_args:sort_by'
+        - 'url.query_args:sort_order'
       tags: {  }
   block_2:
     id: block_2
