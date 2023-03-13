@@ -1,0 +1,80 @@
+{#
+/**
+ * @file
+ * Theme template for the "Top twenty songs" block.
+ *
+ * Available variables:
+ * - list_one: An array containing the first list items, each item with 'title' and 'cover_image' keys.
+ * - list_two: An array containing the second list items, each item with a 'title' key.
+ * - title: The title of the block.
+ */
+#}
+<div class="top-twenty-songs-block carousel">
+
+  <div class="progress-bar progress-bar--primary hide-on-desktop">
+    <div class="progress-bar__fill"></div>
+  </div>
+
+  <header class="main-post-wrapper">
+
+    <div class="slides">
+    {% for item in list_one %}
+      <article class="main-post">
+
+        {% if item.cover_image %}
+        <figure class="main-post__image">
+          <img src="{{ file_url(item.cover_image.uri.value) }}" alt="{{ item.cover_image.alt.value }}" />
+        </figure>
+        {% endif %}
+
+        <div class="main-post__content">
+          <div class="main-post__tag-wrapper">
+            <span class="main-post__tag">News</span>
+          </div>
+
+          <h1 class="main-post__title">{{ item.title }}</h1>
+
+          <a class="main-post__link" href="#">
+
+          </a>
+
+          <a class="main-post__link" href="#">
+            <span class="main-post__link-text">More Info</span>
+            <svg class="main-post__link-icon main-post__link-icon--arrow" width="37" height="12" viewBox="0 0 37 12" fill="none" xmlns="http://www.w3.org/2000/svg" ><path d="M0 6H36.0001M36.0001 6L31.0001 1M36.0001 6L31.0001 11" stroke="white" />
+            </svg>
+          </a>
+
+          <a class="main-post__link" href="#">
+            <svg class="main-post__link-icon main-post__link-icon--play-btn" width="30" height="30" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="9" stroke="#C20000" stroke-width="2" />
+              <path d="M14 10L8 6V14L14 10Z" fill="white" />
+            </svg>
+
+            <span class="main-post__link-text">Listen</span>
+          </a>
+
+        </div>
+
+      </article>
+    {% endfor %}
+  </div>
+
+  </header>
+
+  <div class="posts-wrapper hide-on-mobile">
+    {% for item in list_two %}
+      <li><div></div></li>
+
+      <article class="post">
+        <div class="progress-bar">
+          <div class="progress-bar__fill"></div>
+        </div>
+        <header class="post__header">
+          <span class="post__tag">News</span>
+          <p class="post__published">16 August 2019</p>
+        </header>
+        <h2 class="post__title">{{ item.title }}</h2>
+      </article>
+    {% endfor %}
+  </div>
+</div>

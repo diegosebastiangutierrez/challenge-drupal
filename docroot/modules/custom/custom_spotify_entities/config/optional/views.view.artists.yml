@@ -451,7 +451,7 @@ display:
         type: grid
         options:
           grouping: {  }
-          columns: 3
+          columns: 5
           automatic_width: true
           alignment: horizontal
           row_class_custom: ''
@@ -664,6 +664,248 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+      tags: {  }
+  block_home_ten_artists_grid:
+    id: block_home_ten_artists_grid
+    display_title: 'Home Artists Grid'
+    display_plugin: block
+    position: 3
+    display_options:
+      fields:
+        name:
+          id: name
+          table: artist_field_data
+          field: name
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: null
+          entity_field: name
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: h3
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: string
+          settings:
+            link_to_entity: false
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        cover_image__alt:
+          id: cover_image__alt
+          table: artist_field_data
+          field: cover_image__alt
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: artist
+          entity_field: cover_image
+          plugin_id: field
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: div
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: title
+          type: remote_image
+          settings: {  }
+          group_column: ''
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+        view_artist:
+          id: view_artist
+          table: artist
+          field: view_artist
+          relationship: none
+          group_type: group
+          admin_label: ''
+          entity_type: artist
+          plugin_id: entity_link
+          label: ''
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: false
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: 'View More'
+          output_url_as_text: false
+          absolute: true
+      pager:
+        type: some
+        options:
+          offset: 0
+          items_per_page: 10
+      sorts: {  }
+      filters: {  }
+      filter_groups:
+        operator: AND
+        groups:
+          1: AND
+      style:
+        type: grid
+        options:
+          grouping: {  }
+          columns: 5
+          automatic_width: true
+          alignment: horizontal
+          row_class_custom: ''
+          row_class_default: true
+          col_class_custom: ''
+          col_class_default: true
+      row:
+        type: semanticviews_row
+        options:
+          skip_blank: 0
+          semantic_html:
+            name:
+              element_type: h3
+              attributes: ''
+            cover_image__alt:
+              element_type: div
+              attributes: ''
+            view_artist:
+              element_type: label
+              attributes: ''
+      defaults:
+        pager: false
+        style: false
+        row: false
+        fields: false
+        sorts: false
+        filters: false
+        filter_groups: false
+      display_description: 'Muestra 10 artistas en grid'
+      display_extenders: {  }
+      block_description: 'Home Artists Grid'
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
       tags: {  }
   page_1:
     id: page_1

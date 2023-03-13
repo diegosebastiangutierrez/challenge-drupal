@@ -349,5 +349,8 @@ class SpotifyApiSettingsForm extends ConfigFormBase {
         }
       }
     }
+
+    parent::submitForm($form, $form_state);
+
   }
 }

@@ -39,9 +39,10 @@ color: white;
 /***************/
 
 .carousel {
-  min-height: 100vh;
+  min-height: 70vh;
+  max-height: 80vh;
   display: grid;
-  grid-template-rows: 1fr 3fr 1.5fr;
+  grid-template-rows: 1fr 1fr 1fr 1.5fr;
   grid-template-columns: 50px 1fr 1fr 1fr 1fr 50px;
   row-gap: 2vh;
   position: relative;
@@ -65,7 +66,7 @@ color: white;
 }
 
 .main-post-wrapper {
-  grid-row: 1/4;
+  grid-row: 1/7;
   grid-column: 1/7;
   position: relative;
 }
@@ -128,8 +129,10 @@ color: white;
   font-size: 0.95em;
   background: #c20000;
   padding: 6px 18px;
+  color:white;
 }
 .main-post__title {
+  color: blue;
   font-weight: 700;
   font-size: 1.95em;
   line-height: 1.25;
@@ -207,18 +210,18 @@ color: white;
   grid-row: 3/4;
   grid-column: 3/6;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  -moz-column-gap: 14px;
-       column-gap: 14px;
+  grid-template-columns: repeat(10, 1fr);
+  -moz-column-gap: 3px;
+       column-gap: 3px;
   z-index: 1;
 }
 
 .post {
   background: rgba(14, 13, 14, 0.6);
-  opacity: 0.3;
+  opacity: 0.6;
   color: #fff;
   position: relative;
-  padding: 16px 20px;
+  padding: 5px;
 }
 .post__header {
   display: flex;

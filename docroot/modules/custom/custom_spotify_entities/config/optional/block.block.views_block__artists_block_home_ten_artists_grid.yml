@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.artists
+  module:
+    - system
+    - views
+  theme:
+    - spotify_theme
+id: views_block__artists_block_home_ten_artists_grid
+theme: spotify_theme
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:artists-block_home_ten_artists_grid'
+settings:
+  id: 'views_block:artists-block_home_ten_artists_grid'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+  exposed: {  }
+visibility:
+  request_path:
+    id: request_path
+    negate: false
+    pages: '<front>'
