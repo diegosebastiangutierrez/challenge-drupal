@@ -8,7 +8,7 @@ dependencies:
 id: spotify_theme_help
 theme: spotify_theme
 region: content_above
-weight: -7
+weight: -9
 provider: null
 plugin: help_block
 settings:

@@ -711,8 +711,8 @@ display:
             trim: false
             preserve_tags: ''
             html: false
-          element_type: h3
-          element_class: ''
+          element_type: div
+          element_class: main-post__link-text
           element_label_type: ''
           element_label_class: ''
           element_label_colon: false
@@ -882,8 +882,8 @@ display:
           skip_blank: 0
           semantic_html:
             name:
-              element_type: h3
-              attributes: ''
+              element_type: div
+              attributes: class|main-post__link-text
             cover_image__alt:
               element_type: div
               attributes: ''

@@ -11,7 +11,7 @@ dependencies:
 id: views_block__artists_block_home_ten_artists_grid
 theme: spotify_theme
 region: content
-weight: 0
+weight: -9
 provider: null
 plugin: 'views_block:artists-block_home_ten_artists_grid'
 settings:

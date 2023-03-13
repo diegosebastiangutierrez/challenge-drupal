@@ -6,7 +6,7 @@ dependencies:
 id: spotify_theme_secondary_local_tasks
 theme: spotify_theme
 region: highlighted
-weight: -2
+weight: -6
 provider: null
 plugin: local_tasks_block
 settings:

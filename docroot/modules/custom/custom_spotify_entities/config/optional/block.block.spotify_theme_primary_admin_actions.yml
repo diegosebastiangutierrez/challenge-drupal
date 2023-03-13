@@ -6,7 +6,7 @@ dependencies:
 id: spotify_theme_primary_admin_actions
 theme: spotify_theme
 region: highlighted
-weight: -5
+weight: -9
 provider: null
 plugin: local_actions_block
 settings:
