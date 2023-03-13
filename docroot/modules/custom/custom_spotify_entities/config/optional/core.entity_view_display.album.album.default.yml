@@ -29,7 +29,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   genre:
     type: entity_reference_rss_category
@@ -48,7 +48,7 @@ content:
       rel: nofollow
       target: _blank
     third_party_settings: {  }
-    weight: 3
+    weight: 1
     region: content
   title:
     type: string
@@ -56,11 +56,10 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
 hidden:
   created: true
-  langcode: true
   release_date: true
   spotify_id: true
   status: true
