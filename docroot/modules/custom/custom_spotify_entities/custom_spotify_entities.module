@@ -189,6 +189,18 @@ function custom_spotify_entities_install() {
     ->set('site_branding_bg_color', 'default')
     ->save();
 
+  $config = \Drupal::configFactory()->getEditable('user.role.anonymous');
+  $permissions = $config->get('permissions');
+
+  // Add permissions to access and view content.
+  $permissions[] = 'view album';
+  $permissions[] = 'view artist';
+  $permissions[] = 'view song';
+  $permissions[] = 'search content';
+
+  // Update the anonymous user role configuration with the new permissions.
+  $config->set('permissions', $permissions)->save();
+
 }
 
 /**

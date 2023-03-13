@@ -17,20 +17,19 @@ bundle: album
 mode: default
 content:
   artist:
-    type: entity_reference_entity_view
+    type: entity_reference_label
     label: hidden
     settings:
-      view_mode: small
-      link: false
+      link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   cover_image:
     type: remote_image
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 1
     region: content
   genre:
     type: entity_reference_rss_category
@@ -40,16 +39,16 @@ content:
     weight: 4
     region: content
   spotify_detail_url:
-    type: link
+    type: link_separate
     label: hidden
     settings:
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: nofollow
+      target: _blank
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   title:
     type: string
@@ -57,7 +56,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 0
+    weight: 2
     region: content
 hidden:
   created: true
