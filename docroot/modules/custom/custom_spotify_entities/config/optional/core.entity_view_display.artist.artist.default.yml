@@ -9,6 +9,7 @@ third_party_settings:
   layout_builder:
     enabled: false
     allow_custom: false
+_core:
 id: artist.artist.default
 targetEntityType: artist
 bundle: artist
