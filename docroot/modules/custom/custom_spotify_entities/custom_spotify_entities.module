@@ -201,6 +201,7 @@ function custom_spotify_entities_install() {
   // Update the anonymous user role configuration with the new permissions.
   $config->set('permissions', $permissions)->save();
 
+
 }
 
 /**
