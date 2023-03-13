@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Olivero's theme Get Started section.
+ *
+ * This section is enabled when no front page content has been populated.
+ *
+ * TODO:
+ * - Move this markup into Drupal's core Frontpage Views.
+ * - Translate/localize this page for different languages.
+ */
+#}
+{% set my_email = 'corazondigital@gmail.com' %}
+{% set email_me = 'mailto:corazondigital@gmail.com' %}
+{% set my_phone = '+54-911-3492-9665' %}
+{% set phone_me = 'https://wa.me/+5491134929665' %}
+<div class="text-content">
+  <h2>{% trans %}Welcome to the Drupal Challenge Website.{% endtrans %}</h2>
+  <p>{% trans %}I hope the results of the Challenge are of your liking and cover your expectations.{% endtrans %}</p>
+  <blockquote>{% trans %}I LOVE DRUPAL.{% endtrans %}</blockquote>
+  <h2>{% trans %}If you see this, you have installed the Drupal Challenge Website successfully.{% endtrans %}</h2>
+  <p>{% trans %}I Took it very seriously and it was a real challenge, i was looing for a project that could allow me to get better at <strong>Drupal 8 &amp; 9 Module Development</strong>.{% endtrans %}</p>
+  <h2>{% trans %}Next Steps: {% endtrans %}</h2>
+  <p>{% trans %}If you like the results, i hope you can give me a chance to get even better.{% endtrans %}</p>
+  <ul>
+    <li>{% trans %}I can be reached out at <a href="{{ email_me }}" target="_blank" rel="nofollow">{{ my_email }}</a>.{% endtrans %}</li>
+    <li>{% trans %}Or via <strong>Whatsapp<strong> at <a href="{{ phone_me }}" target="_blank" rel="nofollow">{{ my_phone }}</a>.{% endtrans %}</li>
+    <li>{% trans %}Yours Truly: <em>Diego Gutierrez</em>.{% endtrans %}</li>
+  </ul>
+</div>
