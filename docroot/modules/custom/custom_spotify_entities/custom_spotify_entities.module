@@ -125,3 +125,133 @@ function custom_spotify_entities_theme() {
     ],
   ];
 }
+
+/**
+ * Implements hook_install().
+ */
+function custom_spotify_entities_install() {
+
+// Load the configuration object for the performance settings.
+  $config = \Drupal::configFactory()->getEditable('system.performance');
+
+  // Set the configuration values.
+  $config->set('cache.page.max_age', 0)
+    ->set('css.preprocess', false)
+    ->set('css.gzip', false)
+    ->set('js.preprocess', false)
+    ->set('js.gzip', false)
+    ->save();
+
+  // Set default theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'olivero')
+    ->save();
+
+  // Set default theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'spotify_theme')
+    ->save();
+
+  // Set admin theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('admin', 'claro')
+    ->save();
+
+  // Load the configuration object for the theme settings.
+  $config = \Drupal::configFactory()->getEditable('olivero.settings');
+
+  // Set the configuration values.
+  $config->set('features.node_user_picture', 1)
+    ->set('features.comment_user_picture', 1)
+    ->set('features.comment_user_verification', 1)
+    ->set('features.favicon', 1)
+    ->set('logo.use_default', 0)
+    ->set('logo.path', 'public://Spotify_Logo_RGB_White.png')
+    ->set('favicon.use_default', 1)
+    ->set('mobile_menu_all_widths', 0)
+    ->set('site_branding_bg_color', 'default')
+    ->save();
+
+  $config = \Drupal::configFactory()->getEditable('spotify_theme.settings');
+
+  // Set the configuration values.
+  $config->set('features.node_user_picture', 1)
+    ->set('features.comment_user_picture', 1)
+    ->set('features.comment_user_verification', 1)
+    ->set('features.favicon', 1)
+    ->set('logo.use_default', 0)
+    ->set('logo.path', 'public://Spotify_Logo_RGB_White.png')
+    ->set('favicon.use_default', 1)
+    ->set('mobile_menu_all_widths', 0)
+    ->set('site_branding_bg_color', 'default')
+    ->save();
+
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function custom_spotify_entities_uninstall() {
+
+// Load the configuration object for the performance settings.
+  $config = \Drupal::configFactory()->getEditable('system.performance');
+
+  // Set the configuration values.
+  $config->set('cache.page.max_age', 0)
+    ->set('css.preprocess', false)
+    ->set('css.gzip', false)
+    ->set('js.preprocess', false)
+    ->set('js.gzip', false)
+    ->save();
+
+  // Set default theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'olivero')
+    ->save();
+
+  // Set default theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('default', 'spotify_theme')
+    ->save();
+
+  // Set admin theme.
+  \Drupal::configFactory()
+    ->getEditable('system.theme')
+    ->set('admin', 'claro')
+    ->save();
+
+  // Load the configuration object for the theme settings.
+  $config = \Drupal::configFactory()->getEditable('olivero.settings');
+
+  // Set the configuration values.
+  $config->set('features.node_user_picture', 1)
+    ->set('features.comment_user_picture', 1)
+    ->set('features.comment_user_verification', 1)
+    ->set('features.favicon', 1)
+    ->set('logo.use_default', 0)
+    ->set('logo.path', 'public://Spotify_Logo_RGB_White.png')
+    ->set('favicon.use_default', 1)
+    ->set('mobile_menu_all_widths', 0)
+    ->set('site_branding_bg_color', 'default')
+    ->save();
+
+  $config = \Drupal::configFactory()->getEditable('spotify_theme.settings');
+
+  // Set the configuration values.
+  $config->set('features.node_user_picture', 1)
+    ->set('features.comment_user_picture', 1)
+    ->set('features.comment_user_verification', 1)
+    ->set('features.favicon', 1)
+    ->set('logo.use_default', 0)
+    ->set('logo.path', 'public://Spotify_Logo_RGB_White.png')
+    ->set('favicon.use_default', 1)
+    ->set('mobile_menu_all_widths', 0)
+    ->set('site_branding_bg_color', 'default')
+    ->save();
+
+}

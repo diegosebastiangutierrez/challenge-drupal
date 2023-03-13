@@ -2,7 +2,12 @@
  *** HERE STARTS MY CUSTOMIZATION ***
  **********************************/
  /********Diego*Gutierrez*********/
-.
+
+.small-picture img{
+height:auto;
+width:100px;
+}
+
 .parallax__header{
   overflow-y: hidden;
   z-index: 10;
