@@ -1,5 +1,0 @@
-name: dc_spotify
-description: Module for Drupal Challange
-package: Custom
-type: module
-core_version_requirement: ^8 || ^9
