@@ -2,11 +2,37 @@ version: '3.7'
 
 services:
 
+  mariadb:
+    image: wodby/mariadb:$MARIADB_TAG
+    container_name: '${PROJECT_NAME}_mariadb'
+    hostname: 'mariadb.devel'
+    stop_grace_period: 30s
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+      MYSQL_DATABASE: $DB_NAME
+#      MYSQL_USER: $DB_USER
+      MYSQL_PASSWORD: $DB_PASSWORD
+    volumes:
+      - './mariadb-data:/var/lib/mysql'
+      - './mariadb-init:/docker-entrypoint-initdb.d'
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: '${PROJECT_NAME}_pma'
+    hostname: 'pma.devel'
+    ports:
+      - 0:80
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_USER=$DB_USER
+      - PMA_PASSWORD=$DB_PASSWORD
+    depends_on:
+      - mariadb
+    labels:
+      - 'traefik.http.routers.${PROJECT_NAME}_pma.rule=Host(`pma.${PROJECT_BASE_URL}`)'
   php:
     user: root
     command: "php-fpm -R"
-    networks:
-      - mariadb_default
     environment:
       PHP_FPM_USER: root
       PHP_FPM_GROUP: root
@@ -19,8 +45,6 @@ services:
   crond:
     image: 'wodby/drupal-php:$PHP_TAG'
     container_name: '${PROJECT_NAME}_crond'
-    networks:
-      - mariadb_default
     environment:
       CRONTAB: 0 * * * * drush -r ${PROJECT_DIR}/docroot cron
     command: sudo -E LD_PRELOAD=/usr/lib/preloadable_libiconv.so crond -f -d 0
@@ -29,8 +53,6 @@ services:
   nginx:
     image: 'wodby/nginx:$NGINX_TAG'
     container_name: '${PROJECT_NAME}_nginx'
-    networks:
-      - mariadb_default
     ports:
       - 0:80
     depends_on:
@@ -49,8 +71,6 @@ services:
   mailhog:
     image: mailhog/mailhog
     container_name: '${PROJECT_NAME}_mailhog'
-    networks:
-      - mariadb_default
     environment:
       MH_HOSTNAME: mailhog.${PROJECT_BASE_URL}
     ports:
@@ -59,7 +79,12 @@ services:
       - 'traefik.http.services.${PROJECT_NAME}_mailhog.loadbalancer.server.port=8025'
       - 'traefik.http.routers.${PROJECT_NAME}_mailhog.rule=Host(`mailhog.${PROJECT_BASE_URL}`)'
 
-networks:
-  mariadb_default:
-    external: true
-    name: mariadb_default
+  traefik:
+    image: traefik
+    restart: always
+    command: --api.insecure=true --providers.docker
+    ports:
+      - '80:80'
+      - '8080:8080'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
