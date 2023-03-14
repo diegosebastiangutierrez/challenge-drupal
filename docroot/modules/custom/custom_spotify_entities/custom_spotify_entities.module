@@ -131,6 +131,20 @@ function custom_spotify_entities_theme() {
  */
 function custom_spotify_entities_install() {
 
+  $theme_list = ['spotify_theme','claro',];
+
+  // Install themes.
+  \Drupal::service('theme_installer')->install($theme_list);
+
+  // Get system theme editable configs.
+  $config = \Drupal::configFactory()->getEditable('system.theme');
+
+  // Set default and admin themes.
+  $config
+    ->set('default', 'spotify_theme')
+    ->set('admin', 'claro')
+    ->save();
+
 // Load the configuration object for the performance settings.
   $config = \Drupal::configFactory()->getEditable('system.performance');
 

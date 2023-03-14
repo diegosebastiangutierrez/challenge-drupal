@@ -13,6 +13,16 @@ function custom_spotify_app_install() {
   // Enable the pathauto, admin_toolbar and admin_toolbar_tools module.
   \Drupal::service('module_installer')->install(['admin_toolbar']);
   \Drupal::service('module_installer')->install(['admin_toolbar_tools']);
+  \Drupal::service('theme_installer')->install(['claro']);
   \Drupal::service('theme_installer')->install(['spotify_theme']);
+
+  // Get system theme editable configs.
+  $system_theme = \Drupal::configFactory()->getEditable('system.theme');
+
+  // Set default and admin themes.
+  $system_theme
+    ->set('default', 'spotify_theme')
+    ->set('admin', 'claro')
+    ->save();
 
 }
